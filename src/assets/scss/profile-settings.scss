@@ -1,0 +1,77 @@
+.usr-module-wrapper {  
+  .profile-container{
+    .form-control{
+     width: 100% !important;
+   }
+  }
+  .male {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    color: #fff;
+    width: 2.5rem;
+    height: 2.1rem;
+  }
+
+  .female {
+    @extend .male;
+  }
+
+  .lnr-pencil {
+    font-size: 16px;
+    font-weight: 600;
+    color: orange;
+  }
+
+  .pevent-none {
+    pointer-events: none;
+  }
+
+  .custom-control-input {
+    &:disabled {
+      &~.custom-control-label {
+        &::before {
+          background-color: #384044;
+        }
+      }
+    }
+  }
+
+  .form-control,
+  .btn-orange {
+    &:disabled {
+      background-color: transparent !important;
+      text-decoration: none;
+    }
+  }
+
+  .custom-control-label {
+    &::before {
+      background-color: #384044;
+    }
+  }
+
+  .custom-radio {
+    .custom-control-input {
+      &:active {
+        &~.custom-control-label {
+          &::before {
+            background-color: #384044;
+          }
+        }
+      }
+
+      &:checked {
+        &~ .custom-control-label {
+          &::before {
+            background-color: #ffa500;
+          }
+
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+}

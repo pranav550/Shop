@@ -1,0 +1,67 @@
+.color-entity label:before{
+    background-color: var(--my-color-var);
+}
+.image-slider-container{ 
+    width: auto;
+    margin: 0 auto;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    /* border: 1px solid #cfcfcf; */
+    margin-bottom: 14px;
+}
+
+/** Styles for thumb slider starts **/
+.wrapper {
+    height: 422px;
+    display: flex;
+    flex-direction: row;
+  }
+  .Gallery .swiper-slide img{
+    cursor: zoom-in;
+  }
+  .swiper-slide img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    -o-object-fit: cover;
+       object-fit: cover;       
+  }
+  .Thumbs {
+    /* flex-basis: auto; */
+    margin-right: 20px;
+  }
+
+  .Thumbs .swiper-slide.swiper-slide-active {
+    border: 2px solid #ddbf4f;
+    padding: 1px;
+  }
+  .Thumbs .swiper-slide-active {
+    opacity: 1;
+  }
+  .swiper-button-white{
+    background-color: #1b1a1a4f;
+    cursor: pointer;
+    width: 40px;
+    height: 50px;
+    background-size: 18px;
+  }
+  .swiper-button-prev{
+    left: 0px;
+  }
+  .swiper-button-next{
+    right: 0px;
+  }
+  
+  /** Media query starts for responsive breakpoint **/
+  @media(min-width:992px){
+    .Thumbs {
+      width: 20%;
+    }
+    .Gallery{
+      width: 80%;
+    }
+  }
+
+
+  

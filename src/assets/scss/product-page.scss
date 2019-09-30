@@ -1,0 +1,248 @@
+/* Product page style starts here */
+
+.product-page {
+  .price-block {
+    font-size: 1.7rem;
+
+    .price-old {
+      float: left;
+      font-size: 65%;
+      color: #f43a59;
+      margin-top: 6px;
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .price-discount {
+      padding-top: 0;
+      margin-top: 6px;
+      margin-left: 10px;
+      font-size: 65%;
+      color: #0ad251;
+      float: left;
+      clear: none;
+    }
+  }
+
+  .ratings {
+    clear: both;
+    margin-bottom: 0;
+
+    .fa-star {
+      font-size: 2rem;
+      color: $qp-color-secondary;
+      cursor: pointer;
+      margin: 0;
+      opacity: 1;
+      margin-right: 4px;
+
+      &:hover {
+        color: #FDAC2B;
+        opacity: .5;
+      }
+
+      &:focus {
+        color: #FDAC2B;
+        opacity: .5;
+      }
+
+      &.rating-highlighted {
+        color: #FDAC2B;
+        opacity: 1;
+      }
+    }
+
+    .fa-star-o {
+      @extend .fa-star;
+      color: #FDAC2B;
+    }
+  }
+
+  .customer-ratings {
+    .ratings {
+      margin: 0 4px 0 -3px;
+      background-color: #fdac2b87;
+      padding: 3px 10px 3px 5px;
+
+      .fa-star {
+        font-size: 1.4rem;
+        color: #FDAC2B;
+        cursor: pointer;
+        margin-right: -6px;
+        opacity: 1;
+        vertical-align: text-bottom;
+
+        &:hover {
+          color: #FDAC2B;
+          opacity: .5;
+        }
+
+        &:focus {
+          color: #FDAC2B;
+          opacity: .5;
+        }
+
+        &.rating-highlighted {
+          color: #f18529;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .spec-table-container {
+    table {
+      &.table {
+        td,
+        th {
+          width: 277px;
+          font-weight: 400;
+        }
+      }
+
+      td,
+      th {
+        width: 277px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .product-info {
+    padding: .6rem !important;
+
+    .price-block {
+      .price-new {
+        font-size: 15px;
+        font-weight: 500;
+        float: none;
+        color: #72848c;
+      }
+
+      .price-old {
+        font-size: 80%;
+        color: #f43a59;
+        margin-top: 11px;
+        margin-left: 0;
+        text-decoration: line-through;
+        float: none;
+      }
+
+      .price-discount {
+        padding-top: 0;
+        font-size: 80%;
+        clear: both;
+        color: #0ad251;
+        float: none;
+      }
+    }
+  }
+}
+
+.color-entity {
+
+  .rounded-circle {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 .2rem rgba(175, 175, 175, 0.96);
+    opacity: .2;
+    margin-right: 0.7rem;
+
+    &.color-available {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 .2rem rgba(99, 98, 98, 0.96);
+      opacity: 1;
+    }
+
+  }
+
+  .custom-radio {
+    &.custom-color-control {
+      .white,
+      .yellow {
+        &.custom-control-input:checked {
+          &~.custom-control-label::after {
+            top: 9px;
+            left: 6px;
+            // background-image: url("../img/check-mark-black.svg");
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23000' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+          }
+        }
+      }
+    }
+
+    .custom-control-input:checked {
+      &~.custom-control-label {
+        &::before {
+          background-color: transparent;
+          box-shadow: none;
+        }
+
+        &::after {
+          top: 3px !important;
+          left: 4px !important;
+        }
+      }
+    }
+  }
+}
+.size-entity {
+  .custom-color-control {
+    margin-right: 0.7rem;
+      .custom-control-input {
+        &~.custom-control-label {
+          &::before {
+            opacity: .2;
+          }
+        }
+      }
+    &.size-available {
+        .custom-control-input {
+            &~.custom-control-label {
+              &::before {
+                opacity: 1;
+              }
+            }
+          }
+    }
+  }
+
+}
+
+.size-count {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: #fff;
+  text-align: center;
+  width: 2.5rem;
+  height: 2.1rem;
+}
+
+.radio-btn-list.custom-radio {
+  .custom-control-input {
+    &~.custom-control-label {
+      &::before {
+        background-color: #384044;
+      }
+    }
+
+    &:active {
+      &~.custom-control-label {
+        &::before {
+          background-color: #384044;
+        }
+      }
+    }
+
+    &.checked,
+    &:checked {
+      &~.custom-control-label {
+        &::before {
+          background-color: #ffa500;
+        }
+
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+}

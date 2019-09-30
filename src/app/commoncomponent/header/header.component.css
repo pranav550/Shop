@@ -1,0 +1,11 @@
+.bg-dark {
+    background-color: #122f3b !important;
+}
+
+.navbar li.dropdown.search-box {
+    position: static !important;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+}

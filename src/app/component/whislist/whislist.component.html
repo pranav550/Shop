@@ -1,0 +1,88 @@
+<app-loading [loadings]="loading"></app-loading>
+<div class="right-column">
+    <main class="main-content product-list-wrapper container-fluid py-5" role="main">
+        <div class="row mb-5">
+            <ng-container *ngFor="let item of wishlistData">
+                <div class="col-6 col-sm-6 col-lg-3 mb-4 wishlist-item">
+                    <a>
+                        <div class="card text-center">
+                            <a class="lnr lnr-cross circle-delete atat " (click)="removeWislitItem(item['wish_list_id']);"></a>
+                            <img class="card-img-top" [src]="item['primary_image']" alt="Related Product 1">
+                            <div class="card-body product-info pb-0">
+                                <h5 class="text-capitalize font-weight-bold mb-0">{{item['wishlistData']}}</h5>
+                                <h6 class="text-capitalize mb-0">{{item['name']}}</h6>
+                            </div>
+                            <div class="price-block d-flex justify-content-center pb-0">
+                                <div>
+                                    <span class="price-new">Rs. {{item['selected_price']}}</span>
+                                    <ng-container *ngIf="item['selected_percentile_price'] >1">
+                                        <span class="price-old ml-3">Rs. {{item['selected_original_price']}}</span>
+                                        <span class="price-discount ml-2">({{item['selected_percentile_price']}}%
+                                            off)</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center px-2">
+                                <h6><strong>Size: </strong> {{item['selected_size'] | uppercase}}</h6>
+                                <h6 class="ml-2"><strong>Qty: </strong> {{item['quantity_selected']}}</h6>
+                            </div>
+                            <div class="card-footer text-center border-top p-2">
+                                <a (click)=moveToBag(item)>
+                                    <h6 class="mv-to-bag font-weight-bold mb-1">Add To Bag</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </ng-container>
+            <!-- <div class="col-lg-12" >
+                <nav>
+                    <ul class="pagination pagination-lg justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">5</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">6</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" text-center p-4" *ngIf="wishlistData.length==0 " [hidden]="isDisplay">
+                    <img src="assets/img/empty-wishlist.png" alt="no-data" width="240">
+                    <h1 class="text-orange">Your wishlist is empty</h1>
+                    <h3>Looks like you have no items in your wish list.</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" text-center p-4" *ngIf="wishlistData.length==0 && !userInfo ">
+                    <img src="assets/img/empty-wishlist.png" alt="no-data" width="240">
+                    <h1 class="text-orange">Your wishlist is empty</h1>
+                    <h3>Looks like you have no items in your wish list.</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

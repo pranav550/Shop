@@ -1,0 +1,401 @@
+<app-loading [loadings]="loading"></app-loading>
+<div class="right-column">
+    <div class="main-content container-fluid py-5" role="main">
+        <div id="toast">
+            <div id="img" class="warning"><i class="fa fa-check"></i></div>
+            <div id="desc" class="warning">{{successMessage}}</div>
+        </div>
+        <ng-container *ngIf="shoppingCartProduct && shoppingCartProduct['length']>0">
+            <div class="row mb-4">
+                <div class="col-md-8 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <span>Shopping Cart</span>
+                            <span *ngIf="shoppingCartProduct && shoppingCartProduct['length']">items({{shoppingCartProduct['length']
+                                }})</span>
+                        </div>
+                        <div class="card-table table-responsive">
+                            <table class="table table-hover table-sm align-middle">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Product Name</th>
+                                        <th class="text-center">Actions</th>
+                                        <th class="text-right">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of shoppingCartProduct;index as k">
+                                        <td *ngIf="item">
+                                            <div class="media">
+                                                <div class="product-picture bg-primary d-flex mr-3">
+                                                    <img [src]="item['primary_image']" width="70" height="77">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td *ngIf="item">
+                                            <a (click)="productAccess(item)" class="text-black fweight-6">
+                                                {{item['name']}}
+                                            </a>
+                                            <div class="mb-2 fweight-5">
+                                                Sold By: {{item['seller_name']}}
+                                            </div>
+                                            <div>
+                                                <div class="btn-group mr-3" role="group">
+                                                    <a id="btnGroupVerticalDrop2" class="fweight-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Size: {{item['selected_size'] | titlecase}}
+                                                    </a>
+                                                    <!-- <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2">
+                          <div class="px-4 font-weight-bold">Select Size</div> -->
+                                                    <!-- <a class="dropdown-item" href="#">30</a> -->
+                                                    <!-- <a class="dropdown-item" href="#">32</a>
+                          <a class="dropdown-item" href="#">34</a> -->
+                                                    <!-- </div>-->
+                                                </div>
+                                                <div class="btn-group" role="group">
+                                                    <!-- <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2" (change)='onOptionsSelected($event.target.value, item)'> -->
+                                                    <!-- <option class="px-4 font-weight-bold" value="">Select Quantity</option>
+                                                        <option class="dropdown-item" [value]="quant" *ngFor="let quant of newquantityValue ">{{quant}}</option> -->
+                                                    <!-- <a class="dropdown-item" href="#">1</a>
+                                                        <a class="dropdown-item" href="#">2</a>
+                                                        <a class="dropdown-item" href="#">3</a> -->
+                                                    <!-- </div> -->
+                                                    <a class="fweight-6">
+                                                            Quantity: 
+                                                    </a>
+                                                    <select id="selectQty" (change)='onOptionsSelected($event.target.value, item )'>
+                                                        <option selected disabled hidden> {{item['quantity_selected']}}</option>
+                                                        <!-- <option class="px-4 font-weight-bold" value="">Select Quantity</option> -->
+                                                        <option [value]="quant" *ngFor="let quant of newquantityValue ">{{quant}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center" *ngIf="item">
+                                            <form class="my-2 no-waves-effect">
+                                                <div class="btn-group-vertical short-input-field rm-move-btn">
+                                                    <!-- <a routerLink="/wishlist" (click)=addToWishlist(item)>
+                                                        <i class="fa fa-heart text-orange"></i>
+                                                    </a> -->
+                                                    <a *ngIf="!item?.check" (click)=addToWishlist(item,k)>
+                                                        <i class="fa fa-heart-o text-orange"></i>
+
+                                                    </a>
+                                                    <a *ngIf="item?.check">
+                                                        <i class="fa fa-heart text-orange" (click)=checkWishlistActive(item)></i>
+                                                    </a>
+                                                    <a (click)="removeItem(item['shopping_cart_id'])">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    <!-- <div>
+                                                    <button class="btn btn-secondary btn-sm waves-effect waves-light"
+                                                        type="button" (click)=addToWishlist(item)>
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="btn btn-danger btn-sm position-relative waves-effect waves-light"
+                                                        type="button" (click)="removeItem(item['shopping_cart_id'])">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div> -->
+
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td class="text-right fweight-6" *ngIf="item">
+                                            Rs. {{item['selected_price']* item['quantity_selected']}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="text-center">
+                                <!-- <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#couponModal">
+                                Apply Coupon
+                            </button> -->
+                                <a class="btn btn-md btn-outline-secondary animate back m-0" (click)="moveToPreviousLocation()">
+                                    <i class="batch-icon batch-icon-arrow-left">
+                                    </i> Continue Shopping
+                                </a>
+                                <div class="modal" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Apply Coupon</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body px-0">
+                                                <div class="container-fluid">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-9">
+                                                            <div class="my-2 no-waves-effect">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" placeholder="Enter Coupon Code" aria-label="Enter Your Coupon Code..." aria-describedby="add-coupon">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-3 text-right">
+                                                            <button class="btn btn-secondary waves-effect waves-light" type="button" data-dismiss="modal">
+                                                                Apply
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-2 p-0">
+                                                            <h5 class="bg-light py-3 px-4"><strong>Best Coupons For
+                                                                    You</strong></h5>
+                                                        </div>
+                                                        <ng-container *ngFor="let item of couponList">
+                                                            <div class="col-md-12 border-bottom mb-4">
+                                                                <div class="available-coupon d-flex justify-content-between">
+                                                                    <label class="label label-primary text-white p-2 align-self-center">
+                                                                        {{item['coupon_name']}}
+                                                                    </label>
+                                                                    <button data-dismiss="modal" class="btn btn-sm btn-outline-secondary font-weight-bold waves-effect waves-light" (click)="applyCouponOn(item)">
+                                                                        {{getButtonText(item['_id'])}}
+                                                                    </button>
+
+
+
+
+
+                                                                </div>
+                                                                <div class="coupon-desc text-left">
+                                                                    <p class="mb-0" *ngIf="item['coupon_type']=='discount'">
+                                                                        <strong>Discount :
+                                                                            {{(item['discount_value'])}}</strong>
+                                                                    </p>
+                                                                    <p class="mb-0" *ngIf="item['coupon_type']=='cashback' && item['discount_type']=='percent'">
+                                                                        <strong>Cashback :
+                                                                            {{(item['discount_value'])}}%</strong>
+                                                                    </p>
+                                                                    <p class="mb-0" *ngIf="item['coupon_type']=='cashback' && item['discount_type']=='amount'">
+                                                                        <strong>Cashback :
+                                                                            {{(item['discount_value'])}}</strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        {{item['coupon_desc']}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-sm btn-orange btn-gradient position-relative"><span class="gradient">Apply</span></button>
+                    </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-right">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Price Details
+                        </div>
+                        <div class="card-table table-responsive pb-3">
+                            <table class="table table-hover align-middle">
+                                <tbody>
+                                    <tr>
+                                        <!-- <td class="text-right">
+                                            <strong>Bag Total:</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>
+                                                {{moneyTotal}}
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="couponCheck[0]">
+                                        <td class="text-right">
+                                            Bag Discount:
+                                        </td>
+                                        <td class="text-right text-success">Rs. {{couponCheck[0]['discount_value']}}
+                                        </td>
+                                    </tr> -->
+                                        <tr *ngIf="!userInfo">
+                                            <td class="text-right">
+                                                <strong>Bag Total: </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>Rs.{{totalSum}} </strong>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="couponResult">
+                                            <td class="text-right">
+                                                <strong>Bag Total: </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>Rs. {{totalAmount}} </strong>
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="!couponResult && userInfo">
+                                            <td class="text-right">
+                                                <strong>Bag Total: </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>Rs. {{totalAmount}} </strong>
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="!couponResult">
+                                            <td class="text-right">
+                                                Bag Disount:
+                                            </td>
+
+                                            <td class="text-right">
+                                                Rs. {{0}}
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="couponResult">
+                                            <td class="text-right" *ngIf="coupon_type=='discount'">
+                                                Bag Disount:
+                                            </td>
+                                            <td class="text-right" *ngIf="coupon_type=='discount' && discount_type=='percent'">
+                                                {{((totalAmount-bag_price)*100)/totalAmount | number : '1.2-2'}}%
+                                            </td>
+                                            <td class="text-right" *ngIf="coupon_type=='discount' && discount_type=='amount'">
+                                                Rs. {{totalAmount-bag_price}}
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="couponResult">
+                                            <td class="text-right" *ngIf="coupon_type=='cashback'">
+                                                Bag Cashback:
+                                            </td>
+
+                                            <td class="text-right" *ngIf="coupon_type=='cashback' && discount_type=='percent' ">
+
+                                                Rs. {{couponResult.cashback_amount | number : '1.2-2'}}
+                                            </td>
+                                            <td class="text-right" *ngIf="coupon_type=='cashback' && discount_type=='amount' ">
+                                                Rs. {{couponResult.cashback_amount}}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="text-right">
+                                                Estimated Tax:
+                                            </td>
+                                            <td class="text-right">
+                                                Rs. 0.0
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="text-right">
+                                                Delivery:
+                                            </td>
+                                            <td class="text-right text-success">
+                                                Free
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="!userInfo">
+                                            <td class="text-right">
+                                                <strong>Total Payable: </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>Rs.{{totalSum}} </strong>
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="userInfo && !couponResult ">
+                                            <td class="text-right">
+                                                <strong>Total Payable: </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>Rs.{{totalAmount}} </strong>
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="couponResult && userInfo ">
+                                            <td class="text-right">
+                                                <strong>Total Payable:</strong>
+                                            </td>
+                                            <td class="text-right" *ngIf="coupon_type=='discount'">
+                                                <strong *ngIf="discount_type=='amount'">Rs.
+                                                {{bag_price}}</strong>
+                                                <strong *ngIf="discount_type=='percent'">Rs.
+                                                {{bag_price}}</strong>
+                                            </td>
+                                            <td class="text-right" *ngIf="coupon_type=='cashback'">
+                                                <strong>Rs.{{totalAmount}}</strong>
+                                            </td>
+                                            <td class="text-right" *ngIf="!couponResult && userInfo">
+                                                <strong>Rs.{{totalAmount}}</strong>
+                                            </td>
+
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="text-right" *ngIf="this.userInfo">
+                                <a class="applied-coupon" (click)="deleteCoupon()" *ngIf="coupon_type">
+                                        {{coupon_name | uppercase}} <i class="lnr lnr-cross ml-2"></i>
+                                </a>
+                            </div>
+                            <div class="text-right mt-4" *ngIf="this.userInfo">
+                                <button class="btn btn-outline-secondary mt-0 mb-4" type="button" data-toggle="modal" data-target="#couponModal" click=" getCoupon()">
+                                    Apply Coupon
+                                </button>
+                            </div>
+                            <a *ngIf="placeOrderButton " class="btn btn-orange btn-gradient btn-lg btn-block float-right position-relative animate " routerLink="/checkout">
+                                <span class="gradient ">Place Order</span>
+                                <i class="batch-icon batch-icon-arrow-right align-middle ml-1 "></i>
+                            </a>
+                            <a *ngIf="!placeOrderButton " class="btn btn-orange btn-gradient btn-lg btn-block float-right position-relative " routerLink="/login">
+                                <span class="gradient ">Please do sign for Place Order</span>
+                                <i class="batch-icon batch-icon-arrow-right align-middle ml-1 "></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div class="row " *ngIf="(shoppingCartProduct !=null) && (shoppingCartProduct['length'] ==0 && userInfo)" [hidden]="isDisplay">
+            <div class="col-md-12 ">
+                <div class=" text-center p-4 ">
+                    <img src="assets/img/cart-empty.png " alt="no-data " width="300 ">
+                    <h1 class="text-orange mt-5 ">Your cart is empty</h1>
+                    <h3>Looks like you have no items in your shopping cart.</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="(shoppingCartProduct !=null && shoppingCartProduct['length'] ==0 && !userInfo) ">
+            <div class="col-md-12">
+                <div class=" text-center p-4 ">
+                    <img src="assets/img/cart-empty.png " alt="no-data " width="300 ">
+                    <h1 class="text-orange mt-5 ">Your cart is empty</h1>
+                    <h3>Looks like you have no items in your shopping cart.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="(shoppingCartProduct ==null && !userInfo) ">
+        <div class="col-md-12">
+            <div class=" text-center p-4 ">
+                <img src="assets/img/cart-empty.png " alt="no-data " width="300 ">
+                <h1 class="text-orange mt-5 ">Your cart is empty</h1>
+                <h3>Looks like you have no items in your shopping cart.</h3>
+            </div>
+        </div>
+    </div>
+</div>

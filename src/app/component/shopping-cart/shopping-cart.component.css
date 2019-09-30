@@ -1,0 +1,11 @@
+#selectQty {
+    border: 0;
+    width: 37px;
+    outline: 0;
+}
+
+.applied-coupon {
+    border: 1px dashed #8d8888;
+    padding: 10px;
+    color: #07a7e3;
+}

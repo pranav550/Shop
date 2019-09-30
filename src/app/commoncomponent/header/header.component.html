@@ -1,0 +1,222 @@
+<!-- <app-loading [loadings]="loading"></app-loading> -->
+<nav class="navbar-sidebar-horizontal navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" (click)="HomePage()">
+        <img src="assets/img/logo_white.png" width="145" height="52" alt="eShop">
+    </a>
+    <button #triggerHambruger (click)="offCanvas()" class="navbar-toggler hamburger hamburger--slider" type="button" data-toggle="offcanvas" data-target="#navbarSupportedContent-2" aria-controls="navbarSupportedContent-2" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <ul class="navbar-nav ml-auto mobile-only-control d-block d-lg-none">
+        <li class="nav-item dropdown position-static">
+            <a class="nav-link dropdown-toggle pr-0" id="navbar-notification-search-mobile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                <i class="batch-icon batch-icon-search"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search-mobile">
+                <li>
+                    <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                        <div class="input-group flex-wrap-reverse">
+                            <input type="text" list="browsers" id="input" class="form-control" (input)="searchLoad()" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2" name="searchText1" #searchText1="ngModel" [(ngModel)]="searchText" autocomplete="off">
+                            <datalist id="browsers" *ngIf="searchText?.length >0">
+                                <ng-container *ngFor="let prod of productList;let i=index">
+                                    <option value="{{prod.name}}">
+                                </ng-container>
+                            </datalist>
+
+                            <div class="input-group-append">
+                                <button class="btn btn-primary waves-effect waves-light border-0" type="button">
+                                    <i class="batch-icon batch-icon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="offcanvas-collapse navbar-collapse justify-content-end mobile-menu-collpase pl-xl-5" id="navbarSupportedContent-2">
+        <ul class="navbar-nav navbar-header-menu mr-auto">
+            <li class="nav-item dropdown" (mouseover)="showOptions()" (click)="toggleClass()" [ngClass]="{'show': status}">
+                <a class="nav-link dropdown-toggle fweight-5" id="navbar-dropdown-ecommerce-link" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <i class="batch-icon batch-icon-store px-1"></i> Shop By Category
+                </a>
+
+                <!-- <ng-container *ngIf="dataHeader" > -->
+                <ul class="dropdown-menu" [hidden]="!dataHeader" id="category-options" #mainScreen aria-labelledby="navbar-dropdown-ecommerce-link" [ngClass]="{'show': status}">
+
+                    <li class="dropdown dropdown-submenu" *ngFor="let item of categoriesData">
+                        <a class="dropdown-item dropdown-toggle" id="drop-data" drop (click)="toggleSubClass(id=item['_id'])" [ngClass]="{'show': selectedId === item['_id'],  'hide': selectedId != item['_id']}">{{item.name}}</a>
+                        <!-- [style.height.px]="viewHeight" -->
+                        <ul class="dropdown-menu sub-category-container" [style.height.px]="viewHeight" [ngClass]="{'show': selectedId === item['_id'],  'hide': selectedId != item['_id']}" id="{{item['_id']}}">
+                            <li *ngFor="let item1 of item['product_sub_categories']">
+                                <a (click)="setItemForProduct(item1['name'],item1['_id'])" class="dropdown-item">{{item1.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <li class="dropdown dropdown-submenu" [class.show]="active === i" *ngFor="let item of categoriesData; let i=index;" (click)="toggleSubClass(i,item)">
+                            <a class="dropdown-item dropdown-toggle" data-flip="false" id="drop-data" aria-haspopup="true"                            
+                                aria-expanded="false" drop [ngClass]="{'show': selectedItem == item && isDone}">{{item.name}}</a>
+                                [style.height.px]="viewHeight"
+                            <ul class="dropdown-menu sub-category-container" [ngClass]="{'show': selectedItem == item && isDone}">
+                                <li *ngFor="let item1 of item['product_sub_categories']"><a (click)="setItemForProduct(item1['name'],item1['_id'])"
+                                        class="dropdown-item">{{item1.name}}</a></li>
+
+                            </ul>
+                        </li> -->
+
+                </ul>
+                <!-- </ng-container> -->
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-notifications">
+            <li class="nav-item inline-search-container">
+                <form class="form-inline my-2 my-lg-0 no-waves-effect d-none d-lg-block">
+                    <div class="input-group flex-wrap-reverse">
+                        <input type="search" list="browsers" id="input1" class="form-control" (input)="searchLoad()" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2" name="searchText1" #searchText1="ngModel" [(ngModel)]="searchText" autocomplete="off">
+                        <datalist id="browsers" *ngIf="searchText?.length >1">
+                            <ng-container *ngFor="let prod of productList;let i=index">
+                                <option value="{{prod.name}}">
+                            </ng-container>
+
+
+                        </datalist>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm waves-effect waves-light border-0" type="button"><span
+                                    class="gradient" (click)="searchLoad()"><i
+                                        class="batch-icon batch-icon-search"></i></span></button>
+                        </div>
+                    </div>
+                </form>
+
+            </li>
+            <!-- <li class="nav-item dropdown search-box d-none d-lg-block">
+                <a class="nav-link dropdown-toggle" id="navbar-notification-search" data-toggle="dropdown" data-flip="false"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="batch-icon batch-icon-search"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search" style="top: 0px;padding: 2.1rem 6rem 2.1rem 2rem !important;">
+                    <li>
+                        <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                            <div class="input-group flex-wrap-reverse">
+                                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
+                                    aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-gradient waves-effect waves-light border-0" type="button"><span
+                                            class="gradient">Search</span></button>
+                                </div>
+                            </div>
+                        </form>
+                        <span class="lnr lnr-cross search-close circle-delete"></span>
+                    </li>
+                </ul>
+            </li> -->
+            <li class="nav-item">
+                <a routerLink="/shopping-cart" class="nav-link no-waves-effect" id="navbar-notification-calendar" data-flip="false" (click)="hamburgerClick()">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span class="notification-number" *ngIf="shoppingCartDataCount>0">{{shoppingCartDataCount}}</span>
+                    <span class="d-lg-none notification-title">Shopping Cart</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a routerLink="/wishlist" class="nav-link no-waves-effect" id="navbar-notification-calendar" data-flip="false" (click)="hamburgerClick()">
+                    <i class="fa fa-heart"></i>
+                    <span class="notification-number" *ngIf="wishlistDataCount>0">{{wishlistDataCount }}</span>
+                    <span class="d-lg-none notification-title">Wishlist</span>
+                </a>
+            </li>
+
+            <!-- <li class="nav-item">
+                <a routerLink="/wishlist" class="nav-link no-waves-effect" id="navbar-notification-calendar" data-flip="false" (click)="hamburgerClick()">
+                    <i class="fa fa-heart"></i>
+                    <span class="notification-number" *ngIf="newWishlistDataCount>0">{{newWishlistDataCount }}</span>
+                    <span class="d-lg-none notification-title">Wishlist</span>
+                </a>
+            </li> -->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle no-waves-effect" id="navbar-notification-misc" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell"></i>
+                    <span class="notification-number">4</span>
+                    <span class="d-lg-none notification-title">Notification</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-md" aria-labelledby="navbar-notification-misc">
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-bell batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">General Notification</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">Just now</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-cloud-download batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Your Download Is Ready</h6>
+                                <div class="notification-text">
+                                    Nibh amet cras sit libero
+                                </div>
+                                <span class="notification-time">5 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-tag-alt-2 batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">New Order</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">Yesterday</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-pull batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Pull Request</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">3 day ago</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-5 navbar-profile">
+            <li class="nav-item dropdown w-100">
+                <a class="nav-link dropdown-toggle d-flex p-2" id="navbar-dropdown-navbar-profile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <div class="profile-picture bg-gradient bg-primary has-message">
+                        <img src="assets/img/profile-pic.jpg" width="44" height="44">
+                    </div>
+                    <div class="profile-name d-block">
+                        {{userInfo ? profile_name : 'USER'}}
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" id="user-options" aria-labelledby="navbar-dropdown-navbar-profile">
+                    <li *ngIf="!userCheck"><a class="dropdown-item" routerLink="/my-order" (click)="hamburgerClick()">My
+                            Orders</a></li>
+                    <li *ngIf="!userCheck"><a class="dropdown-item" routerLink="/address" (click)="hamburgerClick()">address</a></li>
+                    <!-- <li *ngIf="!userCheck"><a class="dropdown-item" routerLink="/card-details">Saved Cards</a></li> -->
+                    <!-- <li *ngIf="!userCheck"><a class="dropdown-item" routerLink="/checkout" (click)="hamburgerClick()">Checkout</a></li> -->
+                    <li *ngIf="!userCheck"><a class="dropdown-item" routerLink="/profile" (click)="hamburgerClick()">Profile Settings</a></li>
+                    <li *ngIf="!userCheck"><a class="dropdown-item" routerLink="/change-password" (click)="hamburgerClick()">Change Password</a></li>
+                    <li *ngIf="userCheck"><a class="dropdown-item" routerLink="/login">Signin</a></li>
+                    <li *ngIf="userCheck"><a class="dropdown-item" routerLink="/registration" (click)="hamburgerClick()">Signup</a></li>
+                    <li *ngIf="!userCheck"><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

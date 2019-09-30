@@ -1,0 +1,136 @@
+.image-slider-container .ng-image-slider .container{
+	margin: 0 -16px;
+	img{
+		border-radius: 1rem;
+	}
+}
+
+.landing-page-wrapper {
+	@extend .product-page;
+	.carousel {
+		.carousel-inner {
+			.carousel-item {
+				img {
+					margin-left: 0;
+					margin-right: 0;
+				}
+			}
+		}
+	}
+	.card {
+		cursor: pointer;
+	}
+}
+.mul-slide {
+	box-shadow: none;
+	background-color: transparent;
+	&:hover, &:focus {
+		box-shadow: none;
+	}
+	.carousel-inner {
+		border-radius: 0.25rem;
+		overflow: hidden;
+		.carousel-item{
+			border-radius: 0.25rem;
+			.card{
+				box-shadow: none !important;
+			}
+			.rounded-corner{
+				border-radius: 1.2rem!important;
+				padding: 5px;				
+			}
+			// &:first-child .rounded-corner{
+			// 	padding-left: 0px;
+			// }
+			// &:last-child .rounded-corner{
+			// 	padding-right: 0px;
+			// }
+		}
+		.carousel-item.active {
+			display: flex;
+		}
+		.carousel-item-next {
+			display: flex;
+			transform: translateX(25%);
+		}
+		.carousel-item-prev {
+			display: flex;
+			transform: translateX(-25%);
+		}
+		.carousel-item-right.active {
+			transform: translateX(25%);
+		}
+		.carousel-item-left.active {
+			transform: translateX(-25%);
+		}
+		.carousel-item-right {
+			transform: translateX(0);
+		}
+		.carousel-item-left {
+			transform: translateX(0);
+		}
+	}
+}
+// @media (min-width: 992px) {
+// 	.navbar-sidebar-horizontal.fixed-top {
+// 		+ {
+// 			.right-column {
+// 				>.sidebar-horizontal.fixed-top {
+// 					+ {
+// 						.main-content {
+// 							padding-top: 109px !important;
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+@media (min-width: 1200px) {
+	.landing-page-wrapper {
+		#carouselExampleIndicators.carousel {
+			.carousel-inner {
+				height: 60vh;
+				cursor: pointer;
+			}
+		}
+	}
+}
+@media (max-width: 512px){
+	.mul-slide {		
+		.carousel-inner {
+			.carousel-item.active {
+				display: flex;
+			}
+			.carousel-item-next {
+				display: flex;
+				transform: translateX(50%);
+			}
+			.carousel-item-prev {
+				display: flex;
+				transform: translateX(-50%);
+			}
+			.carousel-item-right.active {
+				transform: translateX(50%);
+			}
+			.carousel-item-left.active {
+				transform: translateX(-50%);
+			}
+			.carousel-item-right {
+				transform: translateX(0);
+			}
+			.carousel-item-left {
+				transform: translateX(0);
+			}
+		}
+	}
+	.landing-page-wrapper{
+		.custom-card-group{
+			.card{
+				h4{
+				font-size: 1rem;
+				}
+			}
+		}
+	}
+}

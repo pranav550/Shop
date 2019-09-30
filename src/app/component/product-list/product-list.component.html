@@ -1,0 +1,423 @@
+<app-loading [loadings]="loading"></app-loading>
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebar" class="px-0 bg-dark bg-gradient sidebar" [ngClass]="{'open':sideBar}">
+            <button class="d-sm-block d-lg-none navbar-toggler hamburger hamburger--slider" type="button" [ngClass]="{'is-active':sideBar}" (click)='toggleSideBar()'>
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+            <div class="filter-product" id="scrollable">
+                <div class="card-header filter-header d-flex justify-content-between pt-4">
+                    <h4 class="mb-0 fweight-6">Filter</h4>
+                    <a class="fsize-13 pt-1" (click)="revomeFilter(filterForm, this.subCategoriesItemsId)">Clear
+                        All</a>
+                </div>
+                <form id="myform" name="myform" #filterForm="ngForm">
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <h4 class="title fweight-5">Price </h4>
+                        </header>
+                        <div class="filter-content price-range">
+                            <div class="">
+                                <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (click)="ProductfilterList($event,minValue, maxValue)" *ngIf="this.brandsList  ">
+                                </ng5-slider>
+
+                                <!-- <div class="form-row">
+                                    <div class="form-group col-md-6 price">
+                                        <label>Min</label>
+                                        <input type="number" [(ngModel)]="minValue" name="min_value" class="form-control" id="inputEmail4" placeholder="₹0" [value]="myDefaultValue" min="0" (input)="ProductfilterList($event,$event.target.id,minValue)">
+                                    </div>
+                                    <div class="form-group col-md-6 text-right price">
+                                        <label>Max</label>
+                                        <input type="number" [(ngModel)]="maxValue" name="max_value" class="form-control" placeholder="₹1,0000" (input)="ProductfilterList($event,$event.target.id,maxValue)">
+                                    </div>
+                                </div> -->
+                                <!-- <p>Min value: <input type="number" [(ngModel)]="minValue"></p>
+                            <p>Max value: <input type="number" [(ngModel)]="maxValue"></p>     -->
+                            </div>
+                            <!-- card-body.// -->
+                        </div>
+                    </article>
+                    <!-- card-group-item.// -->
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <h4 class="title fweight-5">Brand</h4>
+                        </header>
+                        <div class="filter-content">
+                            <div class="card-body">
+                                <div class="custom-control custom-checkbox" *ngFor="let brand of brandsList;let i=index">
+                                    <!-- <span class="float-right badge badge-light round">0</span> -->
+                                    <!-- '{{brand['selected'] | json}}' -->
+                                    <input type="checkbox" [(ngModel)]="brand[i]" name=brand[i] class="custom-control-input" id="{{brand.name}}" (change)="ProductfilterList($event,$event.target.id,'brand')">
+                                    <label class="custom-control-label" for="{{brand.name}}">{{brand.name}}</label>
+                                </div>
+                                <!-- <div class="custom-control custom-checkbox">
+                            <span class="float-right badge badge-light round">52</span>
+                            <input type="checkbox" class="custom-control-input" id="Check1">
+                            <label class="custom-control-label" for="Check1">Samsung</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox">
+                            <span class="float-right badge badge-light round">132</span>
+                            <input type="checkbox" class="custom-control-input" id="Check2">
+                            <label class="custom-control-label" for="Check2">Black berry</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox">
+                            <span class="float-right badge badge-light round">17</span>
+                            <input type="checkbox" class="custom-control-input" id="Check3">
+                            <label class="custom-control-label" for="Check3">Samsung</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox">
+                            <span class="float-right badge badge-light round">7</span>
+                            <input type="checkbox" class="custom-control-input" id="Check4">
+                            <label class="custom-control-label" for="Check4">Other Brand</label>
+                        </div> -->
+                                <!-- form-check.// -->
+                            </div>
+                            <!-- card-body.// -->
+                        </div>
+                    </article>
+                    <!-- card-group-item.// -->
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <h4 class="title fweight-5">Size</h4>
+                        </header>
+                        <div class="filter-content">
+                            <div class="card-body">
+                                <div class="custom-control custom-checkbox" *ngFor="let size of sizes; let i=index">
+                                    <!-- <span class="float-right badge badge-light round">52</span> -->
+                                    <input type="checkbox" [(ngModel)]="size[i]" name="size[i]" class="custom-control-input" id="{{size.name}}" (change)="ProductfilterList($event,$event.target.id,'size')">
+                                    <label class="custom-control-label" for="{{size.name}}">{{size.name | titlecase}}</label>
+                                </div>
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">52</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="size-1">
+                            <label class="custom-control-label" for="size-1">S</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">132</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="size-2">
+                            <label class="custom-control-label" for="size-2">M</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">17</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="size-3">
+                            <label class="custom-control-label" for="size-3">L</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">7</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="size-4">
+                            <label class="custom-control-label" for="size-4">XL</label>
+                        </div> -->
+                                <!-- form-check.// -->
+                            </div>
+                            <!-- card-body.// -->
+                        </div>
+                    </article>
+                    <!-- card-group-item.// -->
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <h4 class="title fweight-5">Color</h4>
+                        </header>
+                        <div class="filter-content">
+                            <div class="card-body">
+
+                                <div class="custom-control custom-checkbox" *ngFor="let color of colors; let i= index">
+                                    <!-- <span class="float-right badge badge-light round">52</span> -->
+                                    <input type="checkbox" [(ngModel)]="color[i]" name="color[i]" class="custom-control-input" id="{{color.name}}" (change)="ProductfilterList($event,$event.target.id,'color')">
+                                    <label class="custom-control-label" for="{{color.name}}">{{color.name}}</label>
+                                </div>
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">52</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="color-1">
+                            <label class="custom-control-label" for="color-1">Yellow</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">132</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="color-2">
+                            <label class="custom-control-label" for="color-2">Red</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">17</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="color-3">
+                            <label class="custom-control-label" for="color-3">Black</label>
+                        </div> -->
+                                <!-- form-check.// -->
+
+                                <!-- <div class="custom-control custom-checkbox"> -->
+                                <!-- <span class="float-right badge badge-light round">7</span> -->
+                                <!-- <input type="checkbox" class="custom-control-input" id="color-4">
+                            <label class="custom-control-label" for="color-4">Blue</label>
+                        </div> -->
+                                <!-- form-check.// -->
+                            </div>
+                            <!-- card-body.// -->
+                        </div>
+                    </article>
+                </form>
+                <!-- card-group-item.// -->
+            </div>
+        </nav>
+        <div class="right-column">
+
+            <main class="main-content product-list-wrapper container-fluid py-5" role="main">
+                <ng-container *ngIf="dataAccess">
+                    <div class="row mb-5" *ngIf="subCategoriesItems">
+                        <!-- col.// -->
+                        <div class="col-12">
+                            <div class="row m-0">
+                                <div class="col-5 col-md-8 my-3 d-sm-block d-lg-none">
+                                    <button class="navbar-toggler hamburger hamburger--slider menu-slider" type="button" [ngClass]="{'is-active':sideBar}" (click)='toggleSideBar()'>
+                                        <span class="hamburger-box">
+                                            <span class="hamburger-inner"></span>
+                                        </span>
+                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="form-group sort-box col-7 col-md-4 col-lg-3 my-3
+                                offset-lg-9 d-flex justify-content-end">
+                                    <select class="form-control arrow" height="30" (change)='postSort($event.target.value)' *ngIf="productFilter.length>0 || subCategoriesItems.length>0 || productSort.length>0  ">
+                                        <span>Sort By:</span>
+                                        <option value="" selected disabled hidden>Sort By</option>
+                                        <option value="lowtohigh">Price: Low To High</option>
+                                        <option value="hightolow">Price: High To Low</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="row m-0">
+                                <ng-container *ngFor="let item of subCategoriesItems | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; index as k">
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                                        <div class="card flash-zoom text-center">
+                                            <a class="card-img-container" routerLink="product/{{item['selected_custom_id']}}/{{item['brand_name']}}">
+                                                <img class="card-img-top" [src]="item['primary_image']" alt="Related Product 1">
+                                            </a>
+                                            <div class="card-body product-info">
+                                                <h5 class="text-capitalize font-weight-bold mb-0">{{item['brand_name']}}
+                                                </h5>
+                                                <h6 class="text-capitalize mb-0">{{item['name']}}</h6>
+                                            </div>
+                                            <div class="price-block d-flex justify-content-center">
+                                                <div>
+                                                    <span class="price-new">Rs.
+                                                        {{item['selected_original_price']}}</span>
+                                                    <ng-container *ngIf="item['selected_percentile_price'] >1">
+                                                        <span class="price-old ml-3">Rs.
+                                                            {{item['selected_price']}}</span>
+                                                        <span class="price-discount ml-2">({{item['selected_percentile_price']}}%
+                                                            off)</span>
+                                                    </ng-container>
+
+                                                    <a (click)=addToWishlist(item,k) *ngIf="!item.check"><span
+                                                            class="fa fa-heart-o text-orange fweight-11 align-text-bottom ml-2 "
+                                                            aria-hidden="true "></span></a>
+
+                                                    <a (click)=addToWishlist(item,k) *ngIf="item.check"><span
+                                                            class=" fa fa-heart text-orange fweight-11 align-text-bottom ml-2 "
+                                                            aria-hidden="true "></span></a>
+
+                                                </div>
+                                                <!-- <a class="d-flex mb-1 align-self-end ">
+                                                        </a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+
+
+                                <ng-container *ngFor="let item of productFilter | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; index as k ">
+                                    <div class="col-12 col-sm-6 col-lg-3 mb-4 pl-0 ">
+                                        <div class="card flash-zoom text-center ">
+                                            <a class="card-img-container " routerLink="product/{{item[ 'selected_custom_id']}}/{{item[ 'brand_name']}} ">
+                                                <img class="card-img-top " [src]="item[ 'primary_image'] " alt="Related Product 1 ">
+                                            </a>
+                                            <div class="card-body product-info ">
+                                                <h5 class="text-capitalize font-weight-bold mb-0 ">
+                                                    {{item['brand_name']}}</h5>
+                                                <h6 class="text-capitalize mb-0 ">{{item['name']}}</h6>
+                                            </div>
+                                            <div class="price-block d-flex justify-content-center ">
+                                                <div>
+                                                    <span class="price-new ">Rs.
+                                                        {{item['selected_original_price']}}</span>
+                                                    <ng-container *ngIf="item[ 'selected_percentile_price']>1">
+                                                        <span class="price-old ml-3">Rs.
+                                                            {{item['selected_price']}}</span>
+                                                        <span class="price-discount ml-2">({{item['selected_percentile_price']}}%
+                                                            off)</span>
+                                                    </ng-container>
+                                                    <a (click)=addToWishlist(item,k) *ngIf="!item.check"><span
+                                                            class="fa fa-heart-o text-orange fweight-11 align-text-bottom ml-2 "
+                                                            aria-hidden="true "></span></a>
+
+                                                    <a (click)=addToWishlist(item,k) *ngIf="item.check"><span
+                                                            class=" fa fa-heart text-orange fweight-11 align-text-bottom ml-2 "
+                                                            aria-hidden="true "></span></a>
+
+                                                </div>
+                                                <!-- <a class="d-flex mb-1 align-self-end">
+                                                                </a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+
+                                <ng-container *ngFor="let item of productSort | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as k">
+                                    <div class="col-12 col-sm-6 col-lg-3 mb-4 pl-0 ">
+                                        <div class="card flash-zoom text-center ">
+                                            <a class="card-img-container " routerLink="product/{{item['selected_products'][0]['custom_id']}}/{{item[ 'brand_name']}} ">
+                                                <img class="card-img-top " [src]="item[ 'primary_image'] " alt="Related Product 1 ">
+                                            </a>
+                                            <div class="card-body product-info ">
+                                                <h5 class="text-capitalize font-weight-bold mb-0 ">
+                                                    {{item['brand_name']}}</h5>
+                                                <h6 class="text-capitalize mb-0 ">{{item['name']}}</h6>
+                                            </div>
+                                            <div class="price-block d-flex justify-content-center ">
+                                                <div>
+                                                    <span class="price-new ">Rs.
+                                                        {{item['selected_original_price']}}</span>
+                                                    <ng-container *ngIf="item[ 'selected_percentile_price']>1">
+                                                        <span class="price-old ml-3">Rs.
+                                                            {{item['selected_price']}}</span>
+                                                        <span class="price-discount ml-2">({{item['selected_percentile_price']}}%
+                                                            off)</span>
+                                                    </ng-container>
+                                                    <a (click)=addToWishlist(item,k) *ngIf="!item.check"><span
+                                                            class="fa fa-heart-o text-orange fweight-11 align-text-bottom ml-2 "
+                                                            aria-hidden="true "></span></a>
+
+                                                    <a (click)=addToWishlist(item,k) *ngIf="item.check"><span
+                                                            class=" fa fa-heart text-orange fweight-11 align-text-bottom ml-2 "
+                                                            aria-hidden="true "></span></a>
+
+                                                </div>
+                                                <!-- <a class="d-flex mb-1 align-self-end">
+                                                                    </a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+
+
+                            </div>
+                            <!-- <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="subCategoriesItems.length"></ngb-pagination> -->
+                            <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="pageSize" [collectionSize]="productFilter.length || subCategoriesItems.length || productSort.length " *ngIf="productFilter.length>10 || subCategoriesItems.length>10 ">
+                                <ng-template ngbPaginationFirst>First</ng-template>
+                                <ng-template ngbPaginationLast>Last</ng-template>
+                                <ng-template ngbPaginationPrevious>Prev</ng-template>
+                                <ng-template ngbPaginationNext>Next</ng-template>
+                                <ng-template ngbPaginationEllipsis>...</ng-template>
+                                <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+                            </ngb-pagination>
+
+
+                        </div>
+
+
+
+
+
+                        <!-- <div class="col-6 col-md-8 col-lg-9 col-xl-9 px-0">
+                            <div class="row m-0">
+                                
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-lg-12">
+                            <nav>
+                                <ul class="pagination pagination-lg justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript:void(0)">Previous</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="javascript:void(0)">1</a>
+                                    </li>
+                                    <li class="page-item ">
+                                        <a class="page-link" href="javascript:void(0)">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">4</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">5</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">6</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0)">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div> -->
+                    </div>
+
+
+
+                </ng-container>
+
+                <ng-container *ngIf="dataAccess1">
+                    <div class="row" *ngIf="subCategoriesItems?.length == 0 || !this.dataAccess ">
+                        <div class="col-md-12 ">
+                            <div class=" text-center pt-5 ">
+                                <img src="assets/img/not-available.png " alt="no-data " width="130 ">
+                                <!-- <h1 class="alert-link fweight-5 ">Sorry !</h1> -->
+                                <h3 class="alert-link "><strong>Sorry !</strong> No data available for this product.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="dataAccess1 ">
+                    <div class="row " *ngIf="productFilter?.length==1 ">
+                        <div class="col-md-12 ">
+                            <div class=" text-center pt-5 ">
+                                <img src="assets/img/not-available.png " alt="no-data " width="130 ">
+                                <!-- <h1 class="alert-link fweight-5 ">Sorry !</h1> -->
+                                <h3 class="alert-link "><strong>Sorry !</strong> No data available for this product.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="defaultImage">
+                    <div class="row ">
+                        <div class="col-md-12 ">
+                            <div class=" text-center pt-5 ">
+                                <img src="assets/img/not-available.png " alt="no-data " width="130 ">
+                                <!-- <h1 class="alert-link fweight-5 ">Sorry !</h1> -->
+                                <h3 class="alert-link "><strong>Sorry !</strong> No data available for this product.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+            </main>
+        </div>
+    </div>
+</div>

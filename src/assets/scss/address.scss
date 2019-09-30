@@ -1,0 +1,50 @@
+/** saved address **/
+.saved-address {
+    border: 1px solid #dad7d7;
+    border-radius: 3px;
+    padding: 1.2rem;
+  
+    .badge-pill {
+      vertical-align: text-top;
+    }
+
+    .edit-rmv-container{
+        a{
+            &:first-child{
+                color: $es-color-range;
+                font-weight: 600
+            }            
+            &:last-child{
+                color: $qp-color-secondary;
+                font-weight: 600;
+            }
+        }
+        
+    }
+  
+    .custom-control {
+      margin-right: -0.7rem;
+    }
+  
+    .custom-radio.customized-checked-radio {
+      .custom-control-label::before {
+        width: 1.6rem;
+        height: 1.6rem;  
+    }
+      .custom-control-input {
+        &:checked {
+          & ~ .custom-control-label {
+            &::before {
+              width: 1.6rem;
+              height: 1.6rem;
+            }
+  
+            &::after {
+              top: 3px !important;
+              left: 0px !important;
+            }
+          }
+        }
+      }
+    }
+  }

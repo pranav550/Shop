@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://127.0.0.1:8000/my_orders -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="_x_token" content="Yli6MkX4LdC5i7TiZHVSiccgNH5AjwvWhhUtMEFc">
+	<meta name="_home_url" content="http://127.0.0.1:8000">
+	<link rel="icon" href="http://127.0.0.1:8000/img/favicon.png">
+
+	<title>Eshop - web </title>
+
+	<link href="./Eshop - web_files/css" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="./Eshop - web_files/vendor.css">
+	<link rel="stylesheet" type="text/css" href="./Eshop - web_files/common.css">
+	<link rel="stylesheet" type="text/css" href="./Eshop - web_files/styles.css">
+
+	
+</head>
+
+<body cz-shortcut-listen="true">
+
+	<div class="container-fluid">
+		<div class="row">
+
+		<!-- Top nav bar content will come here...........-->
+		<nav class="navbar-sidebar-horizontal navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <a class="navbar-brand" href="http://127.0.0.1:8000/dashboard">
+        <img src="./Eshop - web_files/logo-dark.png" width="145" height="52" alt="QuillPro">
+    </a>
+    <button class="hamburger hamburger--slider" type="button" data-target=".sidebar-horizontal" aria-controls="sidebar-horizontal" aria-expanded="false" aria-label="Toggle Main Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+    <!-- Added Mobile-Only Menu -->
+    <ul class="navbar-nav ml-auto mobile-only-control d-block d-sm-block d-md-block d-lg-none">
+        <li class="nav-item dropdown" style="position: static;">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbar-notification-search-mobile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                <i class="batch-icon batch-icon-search"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search-mobile" style="width: 1226.36px;">
+                <li>
+                    <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-gradient waves-effect waves-light" type="button"><span class="gradient">
+                                    <i class="batch-icon batch-icon-search"></i>
+                                </span></button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--  DEPRECATED CODE:
+        <div class="navbar-collapse" id="navbarSupportedContent">
+    -->
+    <!-- USE THIS CODE Instead of the Commented Code Above -->
+    <!-- .collapse added to the element -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbar-header-content">
+
+        <!-- import navbar-language...................... -->
+        <!-- <!-- <ul class="navbar-nav navbar-language-translation mr-auto">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbar-dropdown-menu-link" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+            <i class="batch-icon batch-icon-book-alt-"></i>
+            English
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-menu-link">
+            <li><a class="dropdown-item" href="#">Français</a></li>
+            <li><a class="dropdown-item" href="#">Deutsche</a></li>
+            <li><a class="dropdown-item" href="#">Español</a></li>
+        </ul>
+    </li>
+</ul> --> --&gt;
+        <!-- import navbar-notification.................. -->
+        <ul class="navbar-nav navbar-notifications float-right">
+    <li class="nav-item dropdown" style="position: static;">
+        <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbar-notification-search" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+            <i class="batch-icon batch-icon-search"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search" style="width: 1226.36px;">
+            <li>
+                <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary btn-gradient waves-effect waves-light" type="button"><span class="gradient">Search</span></button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="http://127.0.0.1:8000/shopping_cart" class="nav-link no-waves-effect" id="navbar-notification-calendar" data-flip="false">
+        <i class="batch-icon fa fa-shopping-bag"></i>
+            <span class="notification-number">6</span>
+        </a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle no-waves-effect" id="navbar-notification-misc" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+            <i class="batch-icon batch-icon-bell"></i>
+            <span class="notification-number">4</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-md" aria-labelledby="navbar-notification-misc">
+            <li class="media">
+                <a href="http://127.0.0.1:8000/task-list.html" class=" waves-effect waves-light">
+                    <i class="batch-icon batch-icon-bell batch-icon-xl d-flex mr-3"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1 notification-heading">General Notification</h6>
+                        <div class="notification-text">
+                            Cras sit amet nibh libero
+                        </div>
+                        <span class="notification-time">Just now</span>
+                    </div>
+                </a>
+            </li>
+            <li class="media">
+                <a href="http://127.0.0.1:8000/task-list.html" class=" waves-effect waves-light">
+                    <i class="batch-icon batch-icon-cloud-download batch-icon-xl d-flex mr-3"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1 notification-heading">Your Download Is Ready</h6>
+                        <div class="notification-text">
+                            Nibh amet cras sit libero
+                        </div>
+                        <span class="notification-time">5 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="media">
+                <a href="http://127.0.0.1:8000/task-list.html" class=" waves-effect waves-light">
+                    <i class="batch-icon batch-icon-tag-alt-2 batch-icon-xl d-flex mr-3"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1 notification-heading">New Order</h6>
+                        <div class="notification-text">
+                            Cras sit amet nibh libero
+                        </div>
+                        <span class="notification-time">Yesterday</span>
+                    </div>
+                </a>
+            </li>
+            <li class="media">
+                <a href="http://127.0.0.1:8000/task-list.html" class=" waves-effect waves-light">
+                    <i class="batch-icon batch-icon-pull batch-icon-xl d-flex mr-3"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1 notification-heading">Pull Request</h6>
+                        <div class="notification-text">
+                            Cras sit amet nibh libero
+                        </div>
+                        <span class="notification-time">3 day ago</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>        <!-- import navbar-language ..................... -->
+        <ul class="navbar-nav ml-5 navbar-profile">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbar-dropdown-navbar-profile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+            <div class="profile-name">
+                G Sangram
+            </div>
+            <div class="profile-picture bg-gradient bg-primary has-message float-right">
+                <img src="./Eshop - web_files/profile-pic.jpg" width="44" height="44">
+            </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown-navbar-profile">
+            <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/profiles-member-profile.html">Profile</a></li>
+            <li>
+                <a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/mail-inbox.html">
+                    Messages 
+                    <span class="badge badge-danger badge-pill float-right">3</span>
+                </a>
+            </li>
+            <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/profiles-member-profile.html">Settings</a></li>
+            <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/sisu-lock-screen.html">Logout</a></li>
+        </ul>
+    </li>
+</ul>
+    </div>
+</nav>
+		<div class="right-column">
+					<nav class="sidebar-horizontal navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+							<div class="navbar-collapse" id="navbar-header-menu-outer">
+								<ul class="navbar-nav navbar-header-menu mr-auto">
+									<li class="nav-item">
+										<a class="nav-link waves-effect waves-light" href="http://127.0.0.1:8000/dashboard">
+											<i class="batch-icon batch-icon-home"></i>
+											Home
+										</a>
+									</li>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle waves-effect waves-light" id="navbar-dropdown-ecommerce-link" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+											<i class="batch-icon batch-icon-store"></i>
+											eCommerce
+										</a>
+										<ul class="dropdown-menu" aria-labelledby="navbar-dropdown-ecommerce-link">
+                                        <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/dashboard">Dashboard</a></li>
+                                        <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/product_list">Product List</a></li>
+                                        <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/ecommerce-category-page.html">Category Page</a></li>
+                                        <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/shopping_cart">Cart</a></li>
+                                        <li><a class="dropdown-item waves-effect waves-light" href="http://127.0.0.1:8000/ecommerce-checkout-page.html">Checkout Page</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+					</nav>
+				<main class="main-content p-4" role="main">
+					<div class="row">
+						<div class="col-md-12">
+                            <h4 class="fweight-5">My Orders</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <h5 class="fweight-5 font-weight-bold mb-0">Order ID: 5355454545455454</h5>
+                                                            <h5 class="font-weight-bold mb-0">Men Jeans</h5>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <p>Delivered on Mon, Oct 15th 18</p>
+                                                            <p>Return policy ended on Oct 25th 18</p>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="product-info  d-flex justify-content-around">
+                                                                <h5>Write a Review</h5>
+                                                                <div class="ratings fsize-11">
+                                                                    <i class="batch-icon batch-icon-star-alt rating-highlighted"></i>
+                                                                    <i class="batch-icon batch-icon-star-alt rating-highlighted"></i>
+                                                                    <i class="batch-icon batch-icon-star-alt rating-highlighted"></i>
+                                                                    <i class="batch-icon batch-icon-star-alt rating-highlighted"></i>
+                                                                    <i class="batch-icon batch-icon-star-alt"></i>
+                                                                </div>
+                                                                <div class="price-block">
+                                                                    <div class="price-new">Rs 1400</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                <div class="media">
+                                                    <div class="product-picture bg-primary d-flex mr-3">
+                                                        <img src="./Eshop - web_files/product-1.png" width="100%" height="167">
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <div class="col-md-12 py-3 mb-3 customer-ratings">
+                                                    <h5 class="font-weight-bold mb-2">
+                                                        <span for="Ratings" class="ratings">4.0
+                                                            <i class="batch-icon batch-icon-star-alt rating-highlighted"></i>
+                                                        </span> Delightful Product by Adidas
+                                                    </h5>
+                                                    <p class="mb-1 fweight-5">This was a nice product design by the manufacturer.I love this product from bottom of my heart. I was literally waiting for this.</p>
+                                                    <h6 class="small">Rahul Kumar Singh<br>
+                                                    Posted on :20th Nov,2018.
+                                                    </h6>
+                                                </div>								
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</main>
+ </div>
+			
+		</div>
+	</div>
+	<!-- Vendor script -->
+
+    <script src="./Eshop - web_files/vendor.js.download"></script>
+    <script src="./Eshop - web_files/common.js.download"></script>
+
+	<script type="text/javascript">
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="_x_token"]').attr('content')
+			}
+		});
+	</script>
+
+
+<div class="hiddendiv common"></div></body></html>

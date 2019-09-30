@@ -1,0 +1,148 @@
+<app-loading [loadings]="loading"></app-loading>
+<div class="right-column sisu signin-up">
+    <div class="row mx-0">
+        <div class="col-md-7 order-md-2 signin-right-column px-5 bg-dark signup-form">
+            <a class="signin-logo d-sm-block d-md-none" href="#">
+                <img src="assets/img/logo-dark.png" width="145" height="52" alt="eShop">
+            </a>
+            <div class="black-overlay">
+                <h1 class="display-4">Signup for an account today</h1>
+                <p class="lead mb-5">
+                    eShop latte SpaceTeam unicorn cortado hacker physical computing paradigm.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-5 order-md-1 signin-left-column bg-white px-5">
+            <a class="signin-logo d-sm-none d-md-block" href="#">
+                <img src="assets/img/logo-dark.png" width="145" height="52" alt="eShop">
+            </a>
+            <div *ngIf="signupScreen">
+                <form class="custom-input-control" [formGroup]="signupForm" (ngSubmit)="registrationUser()">
+                    <div class="alert alert-success" *ngIf="successMsg">
+                        <strong>{{successMessage }}</strong>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">
+                        <strong>{{errorMessage }}</strong>
+                    </div>
+                    <h5 class="font-weight-bold mb-0">Create an account</h5>
+                    <div class="form-group">
+                        <!-- <label for="username">Username</label> -->
+                        <i class="lnr lnr-user placeholder-icon"></i>
+                        <input type="text" class="form-control" id="name" aria-describedby="user" formControlName="name" placeholder="Name">
+                    </div>
+                    <div *ngIf="signupF['name'].errors && (signupF['name'].touched || signupF['name'].dirty)" class="text-danger">
+                        <div *ngIf="signupF['name'].errors.required">
+                            Name is required.
+                        </div>
+                    </div>
+                    <div class="form-group phone-number-field pt-3">
+                        <!-- <label for="exampleInputEmail1">Email or Phone</label> -->
+                        <i class="lnr lnr-smartphone reg-mobile placeholder-icon"></i>
+                        <!-- <input type="text" class="form-control" id="exampleInputMobile" numberOnly maxlength="12" aria-describedby="emailHelp"
+              formControlName="mobile" placeholder="Mobile"> -->
+                        <international-phone-number class="form-control tel-field inter" (click)="changeCountry($event)" id="exampleInputMobil1" placeholder="Enter phone number" formControlName="country_code" [defaultCountry]="'in'" name="mobileCode" [allowedCountries]=""></international-phone-number>
+                        <input type="text" class="form-control pl-0 border-0" [minlength]="10" [maxlength]="10" id="exampleInputmobile" aria-describedby="Mobile" formControlName="mobile" placeholder="Mobile ">
+                    </div>
+                    <div *ngIf="signupF['mobile'].errors && (signupF['mobile'].touched || signupF['mobile'].dirty)" class="text-danger">
+                        <div *ngIf="signupF['mobile'].errors.required">
+                            Mobile Number is required.
+                        </div>
+                        <!-- <div *ngIf="signupF.mobile.errors.minlength">
+              Please provide a valid mobile number.
+            </div> -->
+                        <div *ngIf="signupF['mobile'].errors?.pattern">
+                            Please provide a valid mobile number.
+                        </div>
+                        <div *ngIf="signupF['mobile'].errors?.minlength">
+                            Mobile Number must be 10 digits.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="exampleInputEmail1">Email or Phone</label> -->
+                        <i class="lnr lnr-envelope placeholder-icon"></i>
+                        <input type="email" class="form-control" id="exampleInputemail" aria-describedby="emailHelp" formControlName="email" placeholder="Email (Optional)">
+                    </div>
+                    <div *ngIf="signupF['email'].errors" class="text-danger">
+                        <!-- <div *ngIf="signupF.email.errors.required">
+            Email is required.
+          </div> -->
+                        <div *ngIf="signupF['email'].errors.pattern">
+                            Email must be a valid email id.
+                        </div>
+                    </div>
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="exampleInputEmail1">Phone</label> -->
+                    <!-- <i class="lnr lnr-phone-handset placeholder-icon"></i>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Phone">
+        </div> -->
+                    <div class="form-group">
+                        <i class="lnr lnr-lock placeholder-icon"></i>
+                        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password">
+                    </div>
+                    <div *ngIf="signupF['password'].errors && (signupF['password'].touched || signupF['password'].dirty)" class="text-danger">
+                        <div *ngIf="signupF['password'].errors.required">
+                            Password is required.
+                        </div>
+                        <div *ngIf="signupF['password'].errors.minlength">
+                            Password must be at least 8 characters.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <i class="lnr lnr-lock placeholder-icon"></i>
+                        <input type="password" class="form-control" id="exampleInputPassword2" formControlName="rePassword" placeholder="Confirm Password">
+                    </div>
+                    <div *ngIf="signupF['rePassword'].errors && (signupF['rePassword'].touched || signupF['rePassword'].dirty)" class="text-danger">
+                        <div *ngIf="signupF['rePassword'].errors.required">
+                            Conform Password is required.
+                        </div>
+                        <div *ngIf="signupF['rePassword'].errors.mustMatch">
+                            Passwords must match.
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <!-- <i class="lnr lnr-lock placeholder-icon"></i> -->
+                        <input type="checkbox" name="remember" id="checkValue" formControlName="acceptedTerms"> Remember me
+                    </div>
+                    <div *ngIf="signupF['acceptedTerms'].errors && (signupF['acceptedTerms'].touched || signupF['acceptedTerms'].dirty)" class="text-danger">
+                        <div *ngIf="signupF['acceptedTerms'].errors.required">
+                            Accepted terms is required.
+                        </div>
+                    </div>
+                    <!-- {{signupForm.valid}} -->
+                    <button type="submit" [disabled]="!signupForm.valid" class="btn btn-orange position-relative btn-gradient btn-block mt-5 text-decoration-none">
+            <span class="gradient">Sign Up</span>
+          </button>
+                    <p class="text-center fsize-11 mt-3">
+                        Already Have An Account? <a routerLink="/login">Sign In here</a>
+                    </p>
+                </form>
+            </div>
+            <div *ngIf="confirmScreen || verifyKey">
+                <form class="custom-input-control" [formGroup]="confirmForm">
+                    <div class="alert alert-success" *ngIf="successMsg">
+                        <strong>{{successMessage }}</strong>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">
+                        <strong>{{errorMessage }}</strong>
+                    </div>
+                    <h5 class="font-weight-bold mb-0">Please verify your otp</h5>
+                    <div class="form-group">
+                        <i class="lnr lnr-smartphone placeholder-icon"></i>
+                        <input type="text" class="form-control" id="exampleInputMobile9" numberOnly aria-describedby="emailHelp" formControlName="otp" placeholder="Enter Otp">
+                    </div>
+                    <div *ngIf="confirmF['otp'].errors && (confirmF['otp'].touched || confirmF['otp'].dirty)" class="text-danger">
+                        <div *ngIf="confirmF['otp'].errors.required">
+                            Otp is required.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-orange position-relative btn-gradient btn-block mt-5 text-decoration-none" (click)="confirmOtp()">
+            Submit
+          </button>
+                    <button type="submit" class="btn btn-orange position-relative btn-gradient btn-block mt-3 text-decoration-none" (click)="resendOtp()">
+            Resend Otp
+          </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

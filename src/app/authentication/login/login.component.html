@@ -1,0 +1,103 @@
+<app-loading [loadings]="loading"></app-loading>
+<div class="right-column sisu signin-up">
+	<div class="row mx-0">
+		<div class="col-md-7 order-md-2 signin-right-column px-5 bg-dark login-image">
+			<a class="signin-logo d-sm-block d-md-none" href="#">
+				<img src="assets/img/logo-dark.png" width="145" height="52" alt="eShop">
+			</a>
+			<div class="black-overlay">
+				<h1 class="display-4">Sign In To get Started</h1>
+				<p class="lead mb-5">
+					eShop latte SpaceTeam unicorn cortado hacker physical computing paradigm.
+				</p>
+			</div>
+		</div>
+		<div class="col-md-5 order-md-1 signin-left-column bg-white px-5">
+			<a class="signin-logo d-sm-none d-md-block" href="#">
+				<img src="assets/img/logo-dark.png" width="145" height="52" alt="eShop">
+			</a>
+			<div *ngIf="authenticationKey">
+				<form class="custom-input-control" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+					<!-- <div class="alert alert-success" *ngIf="successMsg">
+						<strong>{{successMessage }}</strong>
+					</div>
+					<div class="alert alert-danger" *ngIf="errorMsg">
+						<strong>{{errorMessage }}</strong>
+					</div> -->
+					<h5 class="font-weight-bold mb-0">Sign in to continue</h5>
+					<div class="form-group">
+						<i class="lnr lnr-user placeholder-icon"></i>
+						<input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" formControlName="user_name"
+						 placeholder="Mobile Or Email">
+					</div>
+					<div *ngIf="signinF.user_name.errors && (signinF['user_name'].touched || signinF['user_name'].dirty)" class="text-danger">
+						<div *ngIf="signinF.user_name.errors.required">
+							Email is required.
+						</div>
+						<!-- <div *ngIf="signinF.user_name.errors.email">
+				  Email must be a valid email address
+				</div> -->
+					</div>
+					<div class="form-group">
+						<i class="lnr lnr-lock placeholder-icon"></i>
+						<input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password">
+						<div *ngIf="signinF.password.errors && (signinF['password'].touched || signinF['password'].dirty)" class="text-danger">
+							<div *ngIf="signinF.password.errors.required">
+								Password is required.
+							</div>
+							<div *ngIf="signinF.password.errors.minlength">
+								Password must be at least 8 characters.
+							</div>
+						</div>
+						<a routerLink="/forget-password" class="d-flex justify-content-end fsize-11">Forgot Password?</a>
+					</div>
+					<button type="submit" [disabled]="!loginForm.valid" class="btn position-relative btn-orange btn-gradient btn-block mt-4 text-decoration-none">
+						<span class="gradient">Sign In</span>
+					</button>
+					<p class="text-center fsize-11 mt-3">
+						Don't Have An Account? <a routerLink="/registration">Sign Up here</a>
+					</p>
+					<div class="form-group mt-4">
+						<a class="fsize-11">Or Login With
+						</a>
+						<a (click)="signInWithFB()">
+							<i class="fa fa-facebook circle ml-4"></i>
+						</a>
+						<a (click)="signInWithGoogle()">
+							<i class="fa fa-google circle"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+			<div *ngIf="confirmAuthentication">
+				<form class="custom-input-control" [formGroup]="confirmForm">
+					<div class="alert alert-success" *ngIf="successMsg">
+						<strong>{{successMessage }}</strong>
+					</div>
+					<div class="alert alert-danger" *ngIf="errorMsg">
+						<strong>{{errorMessage }}</strong>
+					</div>
+					<h5 class="font-weight-bold mb-0">Please verify your otp</h5>
+					<div class="form-group">
+						<i class="lnr lnr-smartphone placeholder-icon"></i>
+						<input type="text" class="form-control" id="exampleInputMobile9" numberOnly aria-describedby="emailHelp"
+						 formControlName="otp" placeholder="Enter Otp">
+					</div>
+					<div *ngIf="confirmF.otp.errors && (confirmF['otp'].touched || confirmF['otp'].dirty)" class="text-danger">
+						<div *ngIf="confirmF.otp.errors.required">
+							Otp is required.
+						</div>
+					</div>
+					<button type="submit" class="btn btn-orange position-relative btn-gradient btn-block mt-5 text-decoration-none"
+					 (click)="confirmOtp()">
+						Submit
+					</button>
+					<button type="submit" class="btn btn-orange position-relative btn-gradient btn-block mt-3 text-decoration-none"
+					 (click)="resendOtp()">
+						Resend Otp
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

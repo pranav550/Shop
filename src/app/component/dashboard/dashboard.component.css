@@ -1,0 +1,8 @@
+.image-slider-container {
+    width: auto;
+    margin: 0 auto;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    /* border: 1px solid #cfcfcf; */
+    margin-bottom: 14px;
+}

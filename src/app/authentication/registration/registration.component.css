@@ -1,0 +1,18 @@
+.signup-form{
+    background-image: url('./../../../assets//img/signup.jpeg')
+}
+.phone-number-field{
+    border-bottom: 1px solid #999999;
+
+    display: flex;
+}
+.tel-field{
+    margin: 0;
+    border: 0;
+    padding-left: 30px;
+}
+
+.inter{
+    max-width: 111px;
+    padding-bottom: 0;
+}

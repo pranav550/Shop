@@ -1,0 +1,21 @@
+.shopping-cart-wrapper{
+    .card-table{
+        .dropdown-menu{
+            width: 14rem;
+        }
+    }
+}
+.rm-move-btn {
+    // .btn {
+    //   min-width: 53px;
+    //   margin: 2px 0;
+    //   font-size: 13px;
+    // }
+    a{
+        font-size: 17px;
+        .fa-trash{
+            font-size: 18px;
+            margin-left: 2px;
+        }
+    }
+  }

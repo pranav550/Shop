@@ -1,0 +1,58 @@
+<div class="right-column">
+    <div class="usr-module-wrapper container">
+        <div class="row justify-content-center align-items-start align-items-xl-center usr-content">
+            <div class="col-11 col-md-6 col-xl-4 mt-5">
+                <div class="card mb-4">
+                    <div class="card-body profile-container">
+                        <form class="custom-input-control" [formGroup]="profileForm" (ngSubmit)="updateProfiile()">
+                            <div class="d-flex justify-content-end">
+                                <a class="btn newtooltip sm p-1" id="editProfile" data-tooltip-position="bottom" data-tooltip="Edit profile" (click)="enableProfileSettings()"><span
+                    class="lnr lnr-pencil"></span></a>
+                            </div>
+                            <fieldset>
+                                <!-- <div class="alert alert-success" *ngIf="successMsg">
+                                    <strong>{{successMessage }}</strong>
+                                </div> -->
+                                <h5 class="font-weight-bold mb-0 mt-4 text-center">Profile Settings</h5>
+                                <div class="form-group">
+                                    <i class="lnr lnr-user placeholder-icon"></i>
+                                    <input type="text" class="form-control  custom-input-control" id="FirstName" placeholder="username" formControlName="name">
+                                </div>
+                                <!-- <div class="form-group">
+                  <i class="lnr lnr-user placeholder-icon"></i>
+                  <input type="text" class="form-control custom-input" id="lastName" placeholder="Last name" value="Singh">
+                </div> -->
+                                <h6 class="mt-4">Gender</h6>
+                                <div class="form-group d-flex justify-content-center my-4">
+                                    <div class="custom-control custom-radio custom-color-control mr-4" data-qp-color="">
+                                        <input type="radio" class="custom-control-input" id="radio1" name="radio-stacked" name="gender" formControlName="gender" value="Male" checked>
+                                        <label class="custom-control-label" for="radio1">
+                      <span class="male">M</span>
+                    </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-color-control" data-qp-color="">
+                                        <input type="radio" class="custom-control-input" id="radio2" name="radio-stacked" name="gender" formControlName="gender" value="Female">
+                                        <label class="custom-control-label" for="radio2">
+                      <span class="female">F</span>
+                    </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <i class="lnr lnr-phone-handset placeholder-icon"></i>
+                                    <input type="text" class="form-control custom-input" id="mobileNo" placeholder="Phone Number" formControlName="mobile">
+                                </div>
+                                <div class="form-group">
+                                    <i class="lnr lnr-user placeholder-icon"></i>
+                                    <input type="email" class="form-control custom-input" id="emailId" placeholder="Email" formControlName="email">
+                                </div>
+                                <button type="submit" class="btn btn-orange btn-gradient btn-block position-relative mt-4">
+                  <span class="gradient">Save</span>
+                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

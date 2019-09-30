@@ -1,0 +1,135 @@
+<div class="right-column">
+    <div class="main-content container-fluid py-5" role="main">
+        <!-- <div id="toast">
+            <div id="img" class="success"><i class="fa fa-check"></i></div>
+            <div id="desc" class="success">{{successMessage}}</div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="fweight-5">My Orders</h4>
+                <!-- <button (click)="closeModalDialog()">Show Toast</button> -->
+                <div class="row">
+                    <ng-container *ngFor="let item of orderData">
+                        <div class="col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+
+                                            <h5 class="font-weight-bold border-bottom mb-0 pb-2"><a href="javascript:void(0)">Order ID:
+                          {{item['order_id']}}</a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-start mt-4">
+                                        <div class="col-8 col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h6 class="font-weight-bold">{{item['sub_category_name']}}</h6>
+                                                    <div class="d-flex">
+                                                        <h6><strong>Size: </strong>{{item['selected_size'] | uppercase}}</h6>
+                                                        <h6 class="ml-4"><strong>Quantity: </strong>{{item['quantity_selected']}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 pl-md-0">
+                                                    <p class="mb-0">Delivery by {{item['delivery_date'] | date: 'EEE, dd MMM yy'}} </p>
+                                                    <p class="mb-0 small">Return policy ended on {{item['return_date'] | date: 'EEE, dd MMM yy'}}</p>
+                                                </div>
+                                                <div class="col-md-5 d-none d-md-block p-0">
+                                                    <div class="product-info d-flex justify-content-md-between justify-content-lg-around">
+                                                        <div class="price-block">
+                                                            <div class="fweight-6">Rs {{item['selected_price']}}</div>
+                                                        </div>
+                                                        <div class="ratings-sm">
+                                                            <i class="fa" *ngFor="let rating of item['ratingStatus']; let i=index;" [ngClass]="{'fa-star rating-highlighted': rating, 'fa-star-o':!rating}"></i>
+                                                        </div>
+                                                        <button [disabled]="item['isReviewDisabled']" (click)="open(item)" data-toggle="modal" data-target="#wraReview" class="font-weight-bold">
+                                  Write a Review
+                              </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md-2 pl-0">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="product-picture">
+                                                    <img src="{{item['primary_image']}}" width="80" height="80">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-2 d-block d-md-none">
+                                            <div class="product-info d-flex justify-content-between align-items-end">
+                                                <div class="price-block">
+                                                    <h5 class="fweight-6 fweight-5 mb-0">Rs {{item['selected_price']}}</h5>
+                                                </div>
+                                                <div class="ratings-sm">
+                                                    <i class="fa" *ngFor="let rating of item['ratingStatus']; let i=index;" [ngClass]="{'fa-star rating-highlighted': rating, 'fa-star-o':!rating}"></i>
+                                                </div>
+                                                <button [disabled]="item['isReviewDisabled']" (click)="open(item)" data-toggle="modal" data-target="#wraReview" class="font-weight-bold">
+                                  Write a Review
+                        </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal" id="wraReview" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body px-0">
+                                                    <form [formGroup]="feedbackForm" (ngSubmit)="updateUserFeedback(feedbackForm,orderInfo['order_id'],orderInfo['_id'])">
+                                                        <div class="container-fluid">
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-12" *ngIf="orderInfo">
+                                                                    <div class="d-flex justify-content-center align-items-center mb-3">
+                                                                        <div class="product-picture bg-primary d-flex">
+                                                                            <img src="{{orderInfo['primary_image']}}" width="" height="55">
+                                                                        </div>
+                                                                        <div class="product-info ml-3">
+                                                                            <h6 class="text-center">{{orderInfo['sub_category_name']}}<strong>(Size:
+                                        </strong>{{orderInfo['selected_size']}},
+                                                                                <strong>Quantity: </strong>{{orderInfo['quantity_selected']}}<strong>)</strong>
+                                                                            </h6>
+                                                                            <div class="ratings-sm text-center">
+                                                                                <i class="fa" *ngFor="let rating of orderInfo['ratingStatus']; let i=index;" [ngClass]="{'fa-star rating-highlighted': rating, 'fa-star-o':!rating}" id="{{item.order_id}}" (click)="userRating(orderInfo.order_id,i)"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="my-2 no-waves-effect">
+                                                                        <div class="form-group">
+                                                                            <input type="text" formControlName="title" class="form-control" placeholder="Title" aria-label="Enter Your Title..." aria-describedby="add-title">
+                                                                            <div *ngIf="feedbackF['title'].errors && (feedbackF['title'].touched || feedbackF['title'].dirty)" class="text-danger ml-1">
+                                                                                <div *ngIf="feedbackF['title'].errors.required">
+                                                                                    Title is required.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group shadow-textarea">
+                                                                            <textarea formControlName="review" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write your comment here..."></textarea>
+                                                                            <div *ngIf="feedbackF['review'].errors && (feedbackF['review'].touched || feedbackF['review'].dirty)" class="text-danger ml-1">
+                                                                                <div *ngIf="feedbackF['review'].errors.required">
+                                                                                    Feedback is required.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-block position-relative btn-orange btn-gradient" [disabled]="!feedbackForm.valid" (click)=closeModalDialog(orderInfo.order_id)>
+                                    <span class="gradient">Submit</span>
+                                  </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>

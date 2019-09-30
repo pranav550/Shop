@@ -1,0 +1,377 @@
+<app-loading [loadings]="loading"></app-loading>
+<div class="right-column">
+    <main class="main-content container-fluid py-5" id="accordion" role="main">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between pt-4">
+                        <span class="d-flex align-items-end">Default Address</span>
+                        <a class="scrollLink collapsed new-address" data-toggle="collapse" href="#collapseNewAddress"
+                            aria-expanded="false" aria-controls="collapseNewAddress" (click)="scrollNavigate();">
+                            <button class="btn btn-md btn-outline-secondary waves-effect waves-light">
+                                <span class="lnr lnr-plus-circle font-weight-bold"></span> Add New Address
+                            </button>
+                        </a>
+                    </div>
+                    <!-- <div class="alert alert-success" *ngIf="successMsg1">
+                        <strong>{{successMessage1 }}</strong>
+                    </div>
+                    <div class="alert alert-success" *ngIf="successMsg">
+                        <strong>{{successMessage }}</strong>
+                    </div> -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-4" *ngFor="let item of addressInfo">
+                                <div class="saved-address p-0">
+                                    <address class="p-3">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="font-weight-bold">{{item['name']}}<span
+                                                    class="badge badge-pill badge-primary ml-3">{{item['address_type']}}</span>
+                                            </h5>
+                                            <div class="custom-control custom-radio customized-checked-radio custom-color-control"
+                                                data-qp-color="transparent">
+                                                <input type="radio" class="custom-control-input" [id]="item._id"
+                                                    name="radio-stacked" checked>
+                                                <label class="custom-control-label" [for]="item._id">
+                                                    <span class="sr-only">Yellow</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            {{item['address_line_1']}} {{item['building_name']}}<br>
+                                            {{item['landmark']}}<br>
+                                            {{item['street']}} {{item['city']}}<br>
+                                            {{item['state_id']}}, {{item['pincode']}} <br>
+                                        </div>
+                                        <div><span class="fweight-5">Mobile</span> : {{item['contact']}}</div>
+                                    </address>
+                                    <div class="edit-rmv-container d-flex border-top p-2">
+                                        <a (click)="editAddress(item['_id'])"
+                                            class="scrollLink w-50 text-center border-right collapsed"
+                                            data-toggle="collapse" href="#collapseEditAddress" aria-expanded="false"
+                                            aria-controls="collapseEditAddress">
+                                            Edit
+                                        </a>
+                                        <a (click)="removeAddress(item['_id'])" class="w-50 text-center">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <ng-container>
+    </ng-container> -->
+        <ng-container>
+            <!-- *ngIf="addressAccess === true" -->
+            <div class="row mb-4 collapse" id="collapseNewAddress" data-parent="#accordion"
+                aria-labelledby="newAddress">
+                <div class="col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Add New Address
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="addressForm" (ngSubmit)="addAddressUser()">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="first-name">Full Name</label>
+                                        <input type="text" formControlName="name" class="form-control" id="full-name"
+                                            placeholder="Full Name">
+
+                                        <div *ngIf="addressF['name'].errors && (addressF['name'].touched || addressF['name'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['name'].errors.required">
+                                                Name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="contact">contact</label>
+                                        <input type="text" formControlName="contact" class="form-control" id="contact"
+                                            placeholder="Enter contact Number">
+                                        <div *ngIf="addressF['contact'].errors && (addressF['contact'].touched || addressF['contact'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['contact'].errors.required">
+                                                Contact Number is required.
+                                            </div>
+                                            <div *ngIf="addressF['contact'].errors?.pattern">
+                                                Please provide a valid contact number.
+                                            </div>
+                                            <div *ngIf="addressF['contact'].errors?.minlength">
+                                                Contact Number must be 10 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="first-name">Address Type</label>
+                                        <input type="text" formControlName="address_type" class="form-control"
+                                            id="full-name" placeholder="Type of address">
+
+                                        <div *ngIf="addressF['address_type'].errors && (addressF['address_type'].touched || addressF['address_type'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['address_type'].errors.required">
+                                                Address type is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="address-1">Address</label>
+                                        <input type="text" formControlName="address_line_1" class="form-control"
+                                            id="address-1" placeholder="Address">
+                                        <div *ngIf="addressF['address_line_1'].errors && (addressF['address_line_1'].touched || addressF['address_line_1'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['address_line_1'].errors.required">
+                                                Address is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="address-2">Building Name</label>
+                                        <input type="text" formControlName="building_name" class="form-control"
+                                            id="address-3" placeholder="Enter Locality">
+                                        <div *ngIf="addressF['building_name'].errors && (addressF['building_name'].touched || addressF['building_name'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['building_name'].errors.required">
+                                                Building name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="address-2">Street</label>
+                                        <input type="text" formControlName="street" class="form-control" id="address-2"
+                                            placeholder="Enter Street">
+                                        <div *ngIf="addressF['street'].errors && (addressF['street'].touched || addressF['street'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['street'].errors.required">
+                                                street is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="address-2">Landmark</label>
+                                        <input type="text" formControlName="landmark" class="form-control"
+                                            id="address-2" placeholder="Enter Landmark">
+                                        <div *ngIf="addressF['landmark'].errors && (addressF['landmark'].touched || addressF['landmark'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['landmark'].errors.required">
+                                                landmark is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="address-2">City</label>
+                                        <input type="text" formControlName="city" class="form-control" id="address-4"
+                                            placeholder="Enter city">
+                                        <div *ngIf="addressF['city'].errors && (addressF['city'].touched || addressF['city'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['city'].errors.required">
+                                                City is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="state">State</label>
+                                        <select class="form-control" id="state"
+                                            (change)="onChange($event.target.value)">
+                                            <option *ngFor="let state of stateList" [value]="state">
+                                                {{state}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="zip-code">Pin Code</label>
+                                        <input type="text" formControlName="pincode" class="form-control" id="zip-code"
+                                            placeholder="Enter Pin Code">
+                                        <div *ngIf="addressF['pincode'].errors && (addressF['pincode'].touched || addressF['pincode'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="addressF['pincode'].errors.required">
+                                                Pincode is required.
+                                            </div>
+                                            <div *ngIf="addressF['pincode'].errors?.pattern">
+                                                Please provide a valid pincode .
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-2 offset-md-5">
+                                        <div class="mt-5">
+                                            <button type="submit" (click)="addressFormSubmitted()"
+                                                [disabled]="!addressForm.valid"
+                                                class="btn btn-orange btn-gradient btn-block btn-lg position-relative waves-effect waves-light">
+                                                <span class="gradient">Save</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- *ngIf="addressAccessForEdit === true" -->
+            <div class="row mb-4 collapse" id="collapseEditAddress" data-parent="#accordion"
+                aria-labelledby="editAddress">
+                <div class="col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Edit Address
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="updateForm" (ngSubmit)="updateUserAddress()">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="first-name">Full Name</label>
+                                        <input type="text" formControlName="name" class="form-control" id="full-name"
+                                            placeholder="Full Name">
+
+                                        <div *ngIf="updateAddressF['name'].errors && (updateAddressF['name'].touched || updateAddressF['name'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['name'].errors.required">
+                                                Name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="contact">contact</label>
+                                        <input type="text" formControlName="contact" class="form-control" id="contact"
+                                            placeholder="Enter contact Number">
+                                        <div *ngIf="updateAddressF['contact'].errors && (updateAddressF['contact'].touched || updateAddressF['contact'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['contact'].errors.required">
+                                                Contact Number is required.
+                                            </div>
+                                            <div *ngIf="updateAddressF['contact'].errors?.pattern">
+                                                Please provide a valid contact number.
+                                            </div>
+                                            <div *ngIf="updateAddressF['contact'].errors?.minlength">
+                                                Contact Number must be 10 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="first-name">Address Type</label>
+                                        <input type="text" formControlName="address_type" class="form-control"
+                                            id="full-name" placeholder="Type of address">
+
+                                        <div *ngIf="updateAddressF['address_type'].errors && (updateAddressF['address_type'].touched || updateAddressF['address_type'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['address_type'].errors.required">
+                                                Address type is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="address-1">Address</label>
+                                        <input type="text" formControlName="address_line_1" class="form-control"
+                                            id="address-1" placeholder="Address">
+                                        <div *ngIf="updateAddressF['address_line_1'].errors && (updateAddressF['address_line_1'].touched || updateAddressF['address_line_1'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['address_line_1'].errors.required">
+                                                Address is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="address-2">Building Name</label>
+                                        <input type="text" formControlName="building_name" class="form-control"
+                                            id="address-3" placeholder="Enter Locality">
+                                        <div *ngIf="updateAddressF['building_name'].errors && (updateAddressF['building_name'].touched || updateAddressF['building_name'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['building_name'].errors.required">
+                                                Building name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="address-2">Street</label>
+                                        <input type="text" formControlName="street" class="form-control" id="address-2"
+                                            placeholder="Enter Street">
+                                        <div *ngIf="updateAddressF['street'].errors && (updateAddressF['street'].touched || updateAddressF['street'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['street'].errors.required">
+                                                street is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="address-2">Landmark</label>
+                                        <input type="text" formControlName="landmark" class="form-control"
+                                            id="address-2" placeholder="Enter Landmark">
+                                        <div *ngIf="updateAddressF['landmark'].errors && (updateAddressF['landmark'].touched || updateAddressF['landmark'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['landmark'].errors.required">
+                                                landmark is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="address-2">City</label>
+                                        <input type="text" formControlName="city" class="form-control" id="address-4"
+                                            placeholder="Enter street">
+                                        <div *ngIf="updateAddressF['city'].errors && (updateAddressF['city'].touched || updateAddressF['city'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['city'].errors.required">
+                                                City is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="state">State</label>
+                                        <select class="form-control" id="state" (change)="onChange($event.target.value)"
+                                            formControlName="state">
+                                            <option *ngFor="let states of stateList" [value]="states">
+                                                {{states}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="zip-code">Pin Code</label>
+                                        <input type="text" formControlName="pincode" class="form-control" id="zip-code"
+                                            placeholder="Enter Pin Code">
+                                        <div *ngIf="updateAddressF['pincode'].errors && (updateAddressF['pincode'].touched || updateAddressF['pincode'].dirty)"
+                                            class="text-danger">
+                                            <div *ngIf="updateAddressF['pincode'].errors.required">
+                                                Pincode is required.
+                                            </div>
+                                            <div *ngIf="updateAddressF['pincode'].errors?.pattern">
+                                                Please provide a valid pincode .
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-2 offset-md-5">
+                                        <div class="mt-5">
+                                            <button type="submit" (click)="editFormSubmitted()"
+                                                [disabled]="!updateForm.valid"
+                                                class="btn btn-orange btn-gradient btn-block btn-lg position-relative waves-effect waves-light">
+                                                <span class="gradient">Save</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </main>
+</div>

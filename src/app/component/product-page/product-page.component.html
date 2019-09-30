@@ -1,0 +1,284 @@
+<app-loading [loadings]="loading"></app-loading>
+
+<ng-container *ngIf="newFilterData[0]">
+    <div class="right-column">
+        <main class="main-content container-fluid py-5 product-page" role="main">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-xl-5">
+
+                                    <ng-container *ngIf="product_image">
+                                        <div class="wrapper">
+                                            <div class="Thumbs swiper-container d-none d-lg-block">
+                                                <div class="swiper-wrapper">
+                                                    <div *ngFor="let images of product_image" class="swiper-slide">
+                                                        <img [src]="images" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Gallery swiper-container">
+                                                <div class="swiper-wrapper">
+                                                    <div *ngFor="let images of product_image" class="swiper-slide">
+                                                        <div class="swiper-zoom-container" data-swiper-zoom="3">
+                                                            <img [src]="images" />
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="swiper-slide">
+                                                        <div class="swiper-zoom-container" data-swiper-zoom="3">
+                                                            <img [src]="newFilterData[0]['images'][1]" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide">
+                                                        <div class="swiper-zoom-container" data-swiper-zoom="3">
+                                                            <img [src]="newFilterData[0]['images'][2]" />
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="swiper-slide"><img
+                                                        src="http://lorempixel.com/1200/1200/nature/4" /></div>
+                                                <div class="swiper-slide"><img
+                                                        src="http://lorempixel.com/1200/1200/nature/5" /></div> -->
+                                                </div>
+                                                <!-- Add Pagination-->
+                                                <div class="swiper-pagination swiper-pagination-white"></div>
+                                                <!-- If we need navigation buttons -->
+                                                <div class="swiper-button-prev swiper-button-white d-lg-none"></div>
+                                                <div class="swiper-button-next swiper-button-white d-lg-none"></div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+
+                                <ng-container>
+                                    <div class="col-12 col-sm-6 col-xl-6">
+                                        <h3 class="text-capitalize font-weight-bold mb-0">
+                                            {{newFilterData[0]['brand_name']}}</h3>
+                                        <h4 class="text-capitalize">{{newFilterData[0]['name']}}</h4>
+                                        <div class="price-block mb-2">
+                                            <div class="price-new">Rs. {{product_price}}</div>
+                                            <!-- <div class="price-old">Rs. {{newFilterData[0]['original_price']}}</div>
+                      <div class="price-discount">({{newFilterData[0]['percentile_price_change']}}).</div> -->
+                                        </div>
+                                        <div class="ratings mt-2">
+                                            <i class="fa" [ngClass]="{'fa-star-o rating-highlighted':!item,'fa-star rating-highlighted':item}" *ngFor="let item of starList; "></i>
+                                        </div>
+                                        <h3 class="mb-0">Description</h3>
+                                        <h5 class="mb-2">
+                                            {{newFilterData[0]['description']}}
+                                        </h5>
+                                        <div class="row">
+                                            <div class="form-group col-lg-9 col-xl-6 my-2 color-entity">
+                                                <h5 class="fweight-6">Color</h5>
+                                                <div *ngFor="let item of newFilterData[0]['available_colors']" [style.background-color]="item.color" class="custom-control custom-radio custom-color-control rounded-circle" [ngClass]="{'color-available':item.isAvailableColor}" (change)="colorSelection(item['color'],newFilterData[0]['_id'])">
+                                                    <input type="radio" class="custom-control-input" [id]="item.color" [(ngModel)]="selectedColor" [ngClass]="item.color |lowercase" [value]="item.color" [name]="item.color">
+                                                    <label class="custom-control-label" [for]="item.color">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4 col-lg-3 col-xl-2 my-3">
+                                                <h5 class="fweight-6">Quantity</h5>
+                                                <div class="form-group">
+                                                    <select class="form-control" height="20" (change)="CheckedItem($event.target.value, newFilterData)">
+                                                            <option *ngFor="let quantity of Quantities" [value]="quantity">
+                                                                {{quantity}}</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-8 col-lg-6 col-xl-12 my-3 size-entity">
+                                                <h5 class="mb-1 fweight-6">Size</h5>
+                                                <!-- <div class="custom-control radio-btn-list custom-radio custom-color-control" *ngFor="let item of newFilterData[0]['available_sizes']">
+                                                <input type="radio" class="custom-control-input" [checked]="item.selected" name="radio-stacked1"
+                                                    [id]="item" [value]="item" (change)='radioChecked(item)'>
+                                                <label class="custom-control-label" [for]="item">
+                                                    <span class="size-count text-uppercase">{{item}}</span>
+                                                </label>
+                                                </div> -->
+                                                <div class="custom-control radio-btn-list custom-radio custom-color-control mb-2" *ngFor="let item of newFilterData['0']['available_sizesModified']" [ngClass]="{'size-available':item.isAvailableSize}">
+                                                    <input type="radio" class="custom-control-input" [(ngModel)]="selectedSize" [name]="item.size" [id]="item.size" [value]="item.size" (change)="radioChecked(item.size,newFilterData[0]['_id'])">
+                                                    <label class="custom-control-label" [for]="item.size">
+                                                        <span class="size-count text-uppercase">{{item.size}}</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12" *ngIf="newFilterData[0]['selected_quantity'] <= 2">
+                                                <h1 class="text-danger boldness-medium mb-3">Sold Out</h1>
+                                            </div>
+
+                                            <div class="col-lg-6 col-xl-4 mb-2 pr-lg-0 " *ngIf="newFilterData[0]['selected_quantity'] > 2" data-tooltip-position="bottom" data-tooltip="Please select size color combination">
+                                                <button class="gradient text-white btn btn-orange-light btn-block" type="button" (click)="addToCart()" [ngClass]="{'newtooltip':addToCartDisabled}" data-tooltip-position="bottom" data-tooltip="Please select size color combination" [disabled]="addToCartDisabled">
+                                                    <span class="gradient">Add to cart</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 mb-2 pr-lg-0" *ngIf="newFilterData[0]['selected_quantity'] <= 2">
+                                                <form [formGroup]="NotificationForm" (ngSubmit)="notifyCustomer()">
+                                                        <button class="btn btn-secondary position-relative btn-block" type="button" (click)="addToWishlist()">
+                                                                Notify Me
+                                                        </button>
+                                                    
+                                                    <!-- <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" formControlName="email" placeholder="Email or Mobile Number to get notified" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-secondary border-0 px-2" type="submit">
+                                                                Notify Me</button>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="notifyF['email'].errors" class="text-danger">
+                                                        <div *ngIf="notifyF['email'].errors.pattern">
+                                                            Email must be a valid email id.
+                                                        </div>
+                                                    </div>-->
+                                                </form> 
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4">
+                                                <button class="btn btn-orange position-relative btn-block" type="button" (click)="addToWishlist()">Add
+                                                    To Wishlist</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pt-4 spec-table-container">
+                                    <h5 class="fweight-5 mb-1">Specification</h5>
+                                    <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <!-- <ng-conatiner  > -->
+                                            <tr *ngFor="let item of newFilterData[0]['meta']">
+                                                <div *ngFor="let item1 of item['attributes']">
+                                                    <td>{{item1['key']}}</td>
+                                                    <td>{{item1['value']}}</td>
+                                                </div>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="more-info d-inline-block" role="tab" id="headingOne" [ngClass]="{'open': isOpen}" (click)="rotateIcon()">
+                                        <h5 class="mb-1">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <span>More Information</span>
+                                                <i class="batch-icon batch-icon-arrow-right batch-icon-md ml-1"></i>
+                                            </a>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
+                                        <table class="table table-borderless table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Product Code</td>
+                                                    <td>{{newFilterData[0]['sku']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sold By</td>
+                                                    <td>{{newFilterData[0]['seller_name'] | titlecase}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Manufacture Details</td>
+                                                    <td>{{newFilterData[0]['manufacturer'] | titlecase}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Country of Origin</td>
+                                                    <td>{{newFilterData[0]['country_of_origin'] | titlecase}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-container *ngIf="items.length>0">
+                <div class="row related-prod-wrapper mb-4">
+
+                    <div class="col-lg-12 ">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="fweight-5">Recently Viewed</h4>
+                            <p class="btn text-primary p-2 m-0" (click)="removeViewedItems()">
+                                Clear All
+                            </p>
+                        </div>
+                        <div id="sliderContainer" class="row">
+                            <div ng2-carouselamos class="slides-wrapper col-12 px-0" [width]="1357" [items]="items" [$item]="itemTemplate" [$prev]="prevTemplate" [$next]="nextTemplate">
+                            </div>
+
+                            <ng-template #prevTemplate>
+                                <i class="batch-icon batch-icon-arrow-left batch-icon-lg" id="left"></i>
+                            </ng-template>
+
+                            <ng-template #nextTemplate>
+                                <i class="batch-icon batch-icon-arrow-right batch-icon-lg" id="right"></i>
+                            </ng-template>
+
+                            <ng-template let-item let-i="index" #itemTemplate>
+                                <div class="items col-6 col-md-4 col-lg-3">
+                                    <div class="card shadow-none text-center">
+                                        <a (click)="viewedProducts(item._id)" class="card-img-container">
+                                            <img [src]="item['primary_image']">
+                                        </a>
+                                        <div class="card-body product-info">
+                                            <h5 class="text-capitalize font-weight-bold mb-0">{{item['brand_name']}}
+                                            </h5>
+                                            <h6 class="text-capitalize mb-0">{{item['name']}}</h6>
+                                        </div>
+                                        <div class="price-block d-flex justify-content-center">
+                                            <div>
+                                                <span class="price-new">Rs. {{item['selected_original_price']}}</span>
+                                                <ng-container *ngIf="item['selected_percentile_price'] >1">
+                                                    <span class="price-old ml-3">Rs. {{item['selected_price']}}</span>
+                                                    <span class="price-discount ml-2">({{item['selected_percentile_price']}}%
+                                                        off)</span>
+                                                </ng-container>
+                                                <span class="fa fa-heart-o fweight-11 align-text-bottom ml-2" aria-hidden="true"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 class="fweight-5">Reviews and Ratings</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <ng-container *ngFor="let item of newFilterData[0].feedback">
+                                            <div class="col-md-12 mb-3 customer-ratings">
+                                                <h5 class="font-weight-bold mb-2">
+                                                    <span for="Ratings" class="ratings">{{item['rating'] | number}}
+                                                        <i class="fa fa-star rating-highlighted"></i>
+                                                    </span> {{item['review_title']}}
+                                                </h5>
+                                                <h6 class="mb-0 fweight-5">{{item['review']}}</h6>
+                                                <p>
+                                                    <strong>{{item['user_name'] | titlecase}}</strong> - {{item['posted_date']}}
+                                                </p>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="this.newFilterData[0]['feedback'] == ''">
+                                            No feedback avialable for this product.
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</ng-container>
